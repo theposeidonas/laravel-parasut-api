@@ -36,35 +36,6 @@
   </p>
 </div>
 
-
-
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>İçindekiler</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">Proje Hakkında</a>
-    </li>
-    <li>
-      <a href="#getting-started">Başlarken</a>
-      <ul>
-        <li><a href="#installation">Projenize Ekleme</a></li>
-        <li><a href="#configuration">Konfigürasyon</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Kullanım</a></li>
-      <ul>
-        <li><a href="#classes">Sınıf</a></li>
-        <li><a href="#functions">Fonksiyonlar</a></li>
-        <li><a href="#data">Veri Gönderme Şekli</a></li>
-      </ul>
-    <li><a href="#todo">TODO</a></li>
-    <li><a href="#license">Lisans</a></li>
-    <li><a href="#contact">İletişim</a></li>
-  </ol>
-</details>
-
-
 # Laravel Paraşüt API 
 
 Bu proje, Laravel için oluşturulmuş kolayca Paraşüt V4 API ile bağlantı kurmanızı sağlayacak bir paket. Paraşüt API bilgilerinizi .env dosyasına girdikten sonra tekrar tekrar Auth işlemleri ile uğraşmadan kolayca istediğiniz fonksiyonu istediğiniz yerde çalıştırabilirsiniz.
