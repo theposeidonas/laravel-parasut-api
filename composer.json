@@ -1,0 +1,48 @@
+{
+    "name": "theposeidonas/laravel-parasut-api",
+    "description": "Paraşüt v4 API for Laravel Projects",
+    "keywords": ["laravel", "Parasut", "Paraşüt"],
+    "license": "MIT",
+    "version": "v1.0.0",
+    "authors": [
+        {
+            "name": "Baran Arda",
+            "email": "info@baranarda.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "Theposeidonas\\LaravelParasutApi\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Theposeidonas\\LaravelParasutApi\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^8.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Theposeidonas\\LaravelParasutApi\\ParasutServiceProvider"
+            ],
+            "aliases": {
+                "Parasut": "Theposeidonas\\LaravelParasutApi\\Facades\\Parasut"
+            }
+        }
+    },
+    "prefer-stable": true,
+    "require": {
+        "guzzlehttp/guzzle": "^7.8"
+    }
+}
