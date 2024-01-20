@@ -48,7 +48,6 @@
     <li>
       <a href="#getting-started">Başlarken</a>
       <ul>
-        <li><a href="#prerequisites">İhtiyaçlar</a></li>
         <li><a href="#installation">Projenize Ekleme</a></li>
         <li><a href="#configuration">Konfigürasyon</a></li>
       </ul>
@@ -66,13 +65,13 @@
 </details>
 
 
-## Proje Hakkında
+# Laravel Paraşüt API 
 
-laravel-parasut-api Laravel için oluşturulmuş kolayca Paraşüt V4 API ile bağlantı kurmanızı sağlayacak bir pakettir. Paraşüt API bilgilerinizi .env dosyasına girdikten sonra tekrar tekrar Auth işlemleri ile uğraşmadan kolayca istediğiniz fonksiyonu çalıştırabilirsiniz.
+Bu proje, Laravel için oluşturulmuş kolayca Paraşüt V4 API ile bağlantı kurmanızı sağlayacak bir paket. Paraşüt API bilgilerinizi .env dosyasına girdikten sonra tekrar tekrar Auth işlemleri ile uğraşmadan kolayca istediğiniz fonksiyonu istediğiniz yerde çalıştırabilirsiniz.
 
 ### Neden ihtiyaç var?
 
-Laravel için yazılmış hızlı ve basit bir Paraşüt API paketi. OAuth2 işlemlerini otomatik olarak yapan, token süresi dolmuşsa otomatik olarak yeni token alan ve Controller içerisine sadece yapacağınız işlemi yazdıran sade bir pakete ihyaç duyuyorduk. Biz de bunu baştan yazdık.
+Laravel için yazılmış hızlı ve basit bir Paraşüt API paketi neredeyse hiç bulunmuyor. OAuth2 işlemlerini otomatik olarak yapan, token süresi dolmuşsa otomatik olarak yeni token alan ve Controller içerisine sadece yapacağınız işlemi yazdıran sade bir pakete ihtiyaç duyuyorduk.
 
 Bug ve Hataları lütfen Issues kısmından bildirin.
 
@@ -82,11 +81,8 @@ Bug ve Hataları lütfen Issues kısmından bildirin.
 
 ## Başlarken
 
-Kullanacağınız proje Laravel projesi olmalıdır. Kurulumu yaptıktan sonra composer ile projenize ekleyebilirsiniz.
+Paraşüt ile mutlaka iletişime geçip gerekli bilgilerinizi alın. Bu hem deneme hesabı hem de normal hesap için geçerlidir. 
 
-### İhtiyaçlar
-
-Paraşüt için yapacağınız tüm işlemler öncesinde, mutlaka bilgileri .env dosyasına girmelisiniz.
 
 ### Projenize ekleme
 
@@ -102,7 +98,7 @@ Eğer gerekiyorsa config dosyasını paylaşmak için şu komutu çalıştırın
 php artisan vendor:publish --tag=parasut-config --force
 ```
 
-Eğer Laravel versiyonunuz eskiyse, her yerde kullanmak için config/app.php dosyasında 'aliases' kısmına şu kodu ekleyin;
+Eğer Laravel versiyonunuz eskiyse veya Auto-Discovery kapalıysa, her yerde kullanmak için config/app.php dosyasında 'aliases' kısmına şu kodu ekleyin;
 
 ```php
 'Parasut' => Theposeidonas\LaravelParasutApi\Facades\Parasut::class,
@@ -110,7 +106,7 @@ Eğer Laravel versiyonunuz eskiyse, her yerde kullanmak için config/app.php dos
 
 ### Konfigürasyon
 
-Kullanım için projenize eklemeyi yaptıktan sonra, .env dosyası içerisinde yukarıya şu satırı ekleyip düzeltmelisiniz;
+Kullanım için projenize eklemeyi yaptıktan sonra, .env dosyası içerisinde şu satırları ekleyip düzeltmelisiniz;
 ```dotenv
 PARASUT_USERNAME="demo@parasut.com"  // Username
 PARASUT_PASSWORD="XXXXXXXXX"  // Password
@@ -182,9 +178,11 @@ Müşteri edit fonksiyonu için: ```Parasut::Customer()->edit($id, $data); ```
 
 şeklinde kullanabilirsiniz. Dökümanlarda gösterilen tüm fonksiyonlar mevcuttur.
 
-##### Veri gönderme şekli
+##### Veri Yapılandırması
 
-Bir sınıfta create fonksiyonu için veri gönderirken, https://apidocs.parasut.com tarafında bahsedilen gibi veri göndermelisiniz. Fakat veriyi JSON olarak değil, Array olarak göndermeniz gereklidir.
+Bir sınıfta create fonksiyonu için veri gönderirken, https://apidocs.parasut.com tarafında bahsedilen şekilde veri göndermelisiniz. Eğer gerekli parametreleri göndermezseniz hata alırsınız.
+
+Ayrıca veriyi JSON olarak değil, Array olarak göndermeniz gereklidir. Paket kendisi JSON'a çevirerek gönderim yapacaktır.
 
 Örnek Müşteri oluşturma;
 ```php
@@ -210,7 +208,7 @@ Array
 (
     [success] => true // İşlem başarılı ise true
     [error] => false // İşlem başarısız ise true
-    [body] => stdClass Object // Paraşüt dökümanlarında yazan response Object şeklinde
+    [body] => stdClass Object // Paraşüt dökümanlarında yazan response -> stdClass Object olarak
     [status] => 200 // Response Status
 )
 ```
@@ -231,8 +229,8 @@ echo $customer['body']->data->attributes->name; // Oluşturulan müşterinin ism
 ### TODO
 
 Eksikleri ve hataları Issues kısmından yazabilirsiniz.
-- [x] Fonksiyonların hepsi dahil edildi
-- [ ] Fonksiyonların ekstra parametreleri dahil edilecek (Query Parameters)
+- [x] Fonksiyonlar dahil edildi
+- [ ] Fonksiyonların ekstra filtreleri dahil edilecek (Query Parameters)
 - [ ] Staging dahil edilecek (Api test modu)
 
 
