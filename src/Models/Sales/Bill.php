@@ -110,6 +110,7 @@ class Bill
             'Authorization' => 'Bearer '.$this->token,
             'Content-Type' => 'application/json',
         ])->post($this->baseUrl.'/'.$id.'/payments', $data);
+        return $this->handleResponse($response);
     }
 
     /**
