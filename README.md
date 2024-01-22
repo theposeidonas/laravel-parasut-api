@@ -204,6 +204,14 @@ Eksikleri ve hataları Issues kısmından yazabilirsiniz.
 - [ ] Fonksiyonların ekstra filtreleri dahil edilecek (Query Parameters)
 - [ ] Staging dahil edilecek (Api test modu)
 
+### Changelog
+
+#### V1.0.1
+
+**22 Ocak 2023**
+
+- Satış Faturasında unutulan pay() fonksiyonu eklendi.
+
 
 
 <p align="right">(<a href="#readme-top">Başa dön</a>)</p>

@@ -101,6 +101,19 @@ class Bill
 
     /**
      * @param $id
+     * @param $data
+     * @return void
+     */
+    public function pay($id, $data)
+    {
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer '.$this->token,
+            'Content-Type' => 'application/json',
+        ])->post($this->baseUrl.'/'.$id, $data);
+    }
+
+    /**
+     * @param $id
      * @return array
      */
     public function cancel($id): array
