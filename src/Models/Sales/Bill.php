@@ -109,7 +109,7 @@ class Bill
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$this->token,
             'Content-Type' => 'application/json',
-        ])->post($this->baseUrl.'/'.$id, $data);
+        ])->post($this->baseUrl.'/'.$id.'/payments', $data);
     }
 
     /**
