@@ -12,7 +12,6 @@
 return  [
     'username' => env('PARASUT_USERNAME'),
     'password' => env('PARASUT_PASSWORD'),
-    'is_stage' => env('PARASUT_IS_STAGE', 0),
     'company_id' => env('PARASUT_COMPANY_ID'),
     'client_id' => env('PARASUT_CLIENT_ID'),
     'client_secret' => env('PARASUT_CLIENT_SECRET'),

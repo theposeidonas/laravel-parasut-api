@@ -81,7 +81,6 @@ Kullanım için projenize eklemeyi yaptıktan sonra, .env dosyası içerisinde �
 ```dotenv
 PARASUT_USERNAME="demo@parasut.com"  // Username
 PARASUT_PASSWORD="XXXXXXXXX"  // Password
-PARASUT_IS_STAGE="0"  // TODO Staging aktif değil şimdilik default olarak 0
 PARASUT_COMPANY_ID="123123" // Company ID
 PARASUT_CLIENT_ID="XXXXXXXXXXXXXXXXX" // Paraşüt Client ID
 PARASUT_CLIENT_SECRET="XXXXXXXXXXXXXXXXX" // Paraşüt Client Secret
@@ -201,16 +200,33 @@ echo $customer['body']->data->attributes->name; // Oluşturulan müşterinin ism
 
 Eksikleri ve hataları Issues kısmından yazabilirsiniz.
 - [x] Fonksiyonlar dahil edildi
+- [x] Eksik diğer kısımlar eklendi. (Others)
+- [x] Staging fonksiyonları çıkartıldı.
 - [ ] Fonksiyonların ekstra filtreleri dahil edilecek (Query Parameters)
-- [ ] Staging dahil edilecek (Api test modu)
 
 ### Changelog
 
+#### V1.0.2
+
+**11 Mart 2024**
+
+- Others altındaki fonksiyonlar eklendi.
+    - ApiHome - TrackableJob - Webhook
+- Config dosyasından staging çıkartıldı. (Artık kullanılmıyor)
+- composer.json'a gereklilikler eklendi.
+
 #### V1.0.1
 
-**22 Ocak 2023**
+**22 Ocak 2024**
 
 - Satış Faturasında unutulan pay() fonksiyonu eklendi.
+
+
+#### V1.0.0
+
+**20 Ocak 2024**
+
+- Initial Release
 
 
 
