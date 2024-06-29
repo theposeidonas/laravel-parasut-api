@@ -37,12 +37,12 @@ class Inbox
     /**
      * @return array
      */
-    public function index(): array
+    public function index($vkn): array
     {
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$this->token,
             'Content-Type' => 'application/json',
-        ])->get($this->baseUrl);
+        ])->get($this->baseUrl.'?filter[vkn]='.$vkn);
         return $this->handleResponse($response);
     }
 
