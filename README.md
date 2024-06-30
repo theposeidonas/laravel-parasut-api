@@ -206,7 +206,7 @@ Eksikleri ve hataları Issues kısmından yazabilirsiniz.
 
 ### Changelog
 
-#### V1.0.2
+#### V1.0.3
 
 **30 Haziran 2024**
 
