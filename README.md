@@ -208,6 +208,12 @@ Eksikleri ve hataları Issues kısmından yazabilirsiniz.
 
 #### V1.0.2
 
+**30 Haziran 2024**
+
+- E-Fatura gelen kutusunda parametre olarak VKN eklendi.(**[safakocamanoglu](https://github.com/safakocamanoglu)**'na teşekkürler.)
+
+#### V1.0.2
+
 **11 Mart 2024**
 
 - Others altındaki fonksiyonlar eklendi.
