@@ -16,6 +16,9 @@ use Theposeidonas\LaravelParasutApi\Models\Formalization\EArchive;
 use Theposeidonas\LaravelParasutApi\Models\Formalization\EBill;
 use Theposeidonas\LaravelParasutApi\Models\Formalization\ESmm;
 use Theposeidonas\LaravelParasutApi\Models\Formalization\Inbox;
+use Theposeidonas\LaravelParasutApi\Models\Other\ApiHome;
+use Theposeidonas\LaravelParasutApi\Models\Other\TrackableJob;
+use Theposeidonas\LaravelParasutApi\Models\Other\Webhook;
 use Theposeidonas\LaravelParasutApi\Models\Sales\Bill;
 use Theposeidonas\LaravelParasutApi\Models\Sales\Customer;
 use Theposeidonas\LaravelParasutApi\Models\Settings\Category;
@@ -202,5 +205,29 @@ class ParasutV4 implements ParasutV4Conract
     public function Waybill(): Waybill
     {
         return new Waybill(Auth::getToken($this->config), $this->config);
+    }
+
+    /**
+     * @return ApiHome
+     */
+    public function ApiHome(): ApiHome
+    {
+        return new ApiHome(Auth::getToken($this->config), $this->config);
+    }
+
+    /**
+     * @return TrackableJob
+     */
+    public function TrackableJob(): TrackableJob
+    {
+        return new TrackableJob(Auth::getToken($this->config), $this->config);
+    }
+
+    /**
+     * @return Webhook
+     */
+    public function Webhook(): Webhook
+    {
+        return new Webhook(Auth::getToken($this->config), $this->config);
     }
 }
