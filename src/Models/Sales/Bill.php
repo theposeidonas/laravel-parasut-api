@@ -3,205 +3,217 @@
 namespace Theposeidonas\LaravelParasutApi\Models\Sales;
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Validator;
+use Theposeidonas\LaravelParasutApi\ParasutV4;
 
 /**
  * Satış Faturası
  * https://apidocs.parasut.com/#tag/SalesInvoices
  */
-class Bill
+class Bill extends ParasutV4
 {
     /**
      * @var string
      */
-    private string $token;
-    /**
-     * @var array
-     */
-    private array $config;
-    /**
-     * @var string
-     */
-    private string $baseUrl;
+    private string $serviceUrl;
 
     /**
-     * @param $token
      * @param $config
      */
-    public function __construct($token, $config)
+    public function __construct($config)
     {
-        $this->token = $token;
-        $this->config = $config;
-        $this->baseUrl = 'https://api.parasut.com/v4/'.$this->config['company_id'].'/sales_invoices';
+        parent::__construct($config);
+        $this->serviceUrl = $this->config['api_url'].$this->config['company_id'].'/sales_invoices';
     }
 
     /**
+     * @param array $parameters
      * @return array
      */
-    public function index(): array
+    public function index(array $parameters = []): array
     {
+        Validator::validate($parameters, [
+            'filter.issue_date'    => 'nullable|string',
+            'filter.due_date'      => 'nullable|string',
+            'filter.contact_id'    => 'nullable|integer',
+            'filter.invoice_id'    => 'nullable|integer',
+            'filter.invoice_series'=> 'nullable|string',
+            'filter.item_type'     => 'nullable|string|in:invoice,refund,estimate,export',
+            'filter.print_status'  => 'nullable|string|in:printed,not_printed,invoices_not_sent,e_invoice_sent,e_archive_sent,e_smm_sent',
+            'filter.payment_status'=> 'nullable|string|in:overdue,not_due,unscheduled,paid',
+            'sort'                 => 'nullable|string|in:id,issue_date,due_date,remaining,remaining_in_trl,description,net_total,-id,-issue_date,-due_date,-remaining,-remaining_in_trl,-description,-net_total',
+            'page.number'          => 'nullable|integer|min:1',
+            'page.size'            => 'nullable|integer|min:1|max:25',
+            'include'              => 'nullable|string|in:category,contact,details,details.product,details.warehouse,payments,payments.transaction,tags,sharings,recurrence_plan,active_e_document',
+        ]);
+
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$this->token,
             'Content-Type' => 'application/json',
-        ])->get($this->baseUrl);
+        ])->get($this->serviceUrl, $parameters);
         return $this->handleResponse($response);
     }
 
     /**
-     * @param $data
+     * @param array $data
+     * @param array $parameters
      * @return array
      */
-    public function create($data): array
+    public function create(array $data, array $parameters = []): array
     {
+        Validator::validate($parameters, [
+            'include' => 'nullable|string|in:category,contact,details,details.product,details.warehouse,payments,payments.transaction,tags,sharings,recurrence_plan,active_e_document',
+        ]);
+
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$this->token,
             'Content-Type' => 'application/json',
-        ])->post($this->baseUrl, $data);
+        ])->post($this->serviceUrl.'?'.http_build_query($parameters), $data);
         return $this->handleResponse($response);
     }
 
     /**
-     * @param $id
+     * @param string $id
+     * @param array $parameters
      * @return array
      */
-    public function show($id): array
+    public function show(string $id, array $parameters = []): array
     {
+        Validator::validate($parameters, [
+            'include' => 'nullable|string|in:category,contact,details,details.product,details.warehouse,payments,payments.transaction,tags,sharings,recurrence_plan,active_e_document',
+        ]);
+
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$this->token,
             'Content-Type' => 'application/json',
-        ])->get($this->baseUrl.'/'.$id);
+        ])->get($this->serviceUrl.'/'.$id, $parameters);
         return $this->handleResponse($response);
     }
 
     /**
-     * @param $id
-     * @param $data
+     * @param string $id
+     * @param array $data
+     * @param array $parameters
      * @return array
      */
-    public function edit($id, $data): array
+    public function edit(string $id, array $data, array $parameters = []): array
     {
+        Validator::validate($parameters, [
+            'include' => 'nullable|string|in:category,contact,details,details.product,details.warehouse,payments,payments.transaction,tags,sharings,recurrence_plan,active_e_document',
+        ]);
+
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$this->token,
             'Content-Type' => 'application/json',
-        ])->put($this->baseUrl.'/'.$id, $data);
+        ])->put($this->serviceUrl.'/'.$id.'?'.http_build_query($parameters), $data);
         return $this->handleResponse($response);
     }
 
     /**
-     * @param $id
+     * @param string $id
      * @return array
      */
-    public function delete($id): array
+    public function delete(string $id): array
     {
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$this->token,
             'Content-Type' => 'application/json',
-        ])->delete($this->baseUrl.'/'.$id);
+        ])->delete($this->serviceUrl.'/'.$id);
         return $this->handleResponse($response);
     }
 
     /**
-     * @param $id
-     * @param $data
-     * @return void
+     * @param string $id
+     * @param array $data
+     * @param array $parameters
+     * @return array
      */
-    public function pay($id, $data)
+    public function pay(string $id, array $data, array $parameters = []): array
+    {
+        Validator::validate($parameters, [
+            'include' => 'nullable|string|in:payable,transaction',
+        ]);
+
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer '.$this->token,
+            'Content-Type' => 'application/json',
+        ])->post($this->serviceUrl.'/'.$id.'/payments?'.http_build_query($parameters), $data);
+        return $this->handleResponse($response);
+    }
+
+    /**
+     * @param string $id
+     * @param array $parameters
+     * @return array
+     */
+    public function cancel(string $id, array $parameters = []): array
+    {
+        Validator::validate($parameters, [
+            'include' => 'nullable|string|in:category,contact,details,details.product,details.warehouse,payments,payments.transaction,tags,sharings,recurrence_plan,active_e_document',
+        ]);
+
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer '.$this->token,
+            'Content-Type' => 'application/json',
+        ])->delete($this->serviceUrl.'/'.$id.'/cancel?'.http_build_query($parameters));
+        return $this->handleResponse($response);
+    }
+
+    /**
+     * @param string $id
+     * @param array $parameters
+     * @return array
+     */
+    public function recover(string $id, array $parameters = []): array
     {
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$this->token,
             'Content-Type' => 'application/json',
-        ])->post($this->baseUrl.'/'.$id.'/payments', $data);
+        ])->patch($this->serviceUrl.'/'.$id.'/recover?'.http_build_query($parameters));
         return $this->handleResponse($response);
     }
 
     /**
-     * @param $id
+     * @param string $id
+     * @param array $parameters
      * @return array
      */
-    public function cancel($id): array
+    public function archive(string $id, array $parameters = []): array
     {
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$this->token,
             'Content-Type' => 'application/json',
-        ])->delete($this->baseUrl.'/'.$id.'/cancel');
+        ])->patch($this->serviceUrl.'/'.$id.'/archive?'.http_build_query($parameters));
         return $this->handleResponse($response);
     }
 
     /**
-     * @param $id
+     * @param string $id
+     * @param array $parameters
      * @return array
      */
-    public function recover($id): array
+    public function unarchive(string $id, array $parameters = []): array
     {
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$this->token,
             'Content-Type' => 'application/json',
-        ])->patch($this->baseUrl.'/'.$id.'/recover');
+        ])->patch($this->serviceUrl.'/'.$id.'/unarchive?'.http_build_query($parameters));
         return $this->handleResponse($response);
     }
 
     /**
-     * @param $id
+     * @param string $id
+     * @param array $data
+     * @param array $parameters
      * @return array
      */
-    public function archive($id): array
+    public function convert(string $id, array $data, array $parameters = []): array
     {
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$this->token,
             'Content-Type' => 'application/json',
-        ])->patch($this->baseUrl.'/'.$id.'/archive');
+        ])->patch($this->serviceUrl.'/'.$id.'/convert_to_invoice?'.http_build_query($parameters), $data);
         return $this->handleResponse($response);
-    }
-
-    /**
-     * @param $id
-     * @return array
-     */
-    public function unarchive($id): array
-    {
-        $response = Http::withHeaders([
-            'Authorization' => 'Bearer '.$this->token,
-            'Content-Type' => 'application/json',
-        ])->patch($this->baseUrl.'/'.$id.'/unarchive');
-        return $this->handleResponse($response);
-    }
-
-    /**
-     * @param $id
-     * @param $data
-     * @return array
-     */
-    public function convert($id, $data): array
-    {
-        $response = Http::withHeaders([
-            'Authorization' => 'Bearer '.$this->token,
-            'Content-Type' => 'application/json',
-        ])->patch($this->baseUrl.'/'.$id.'/convert_to_invoice', $data);
-        return $this->handleResponse($response);
-    }
-
-
-    /**
-     * @param $response
-     * @return array
-     */
-    public function handleResponse($response): array
-    {
-        if ($response->successful()) {
-            return [
-                'success' => true,
-                'error' => false,
-                'body' => json_decode($response->body()),
-                'status' => $response->status()
-            ];
-        } else {
-            return [
-                'success' => false,
-                'error' => true,
-                'body' => json_decode($response->body()),
-                'status' => $response->status(),
-            ];
-        }
-
     }
 
 }

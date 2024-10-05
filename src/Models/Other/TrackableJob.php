@@ -3,70 +3,39 @@
 namespace Theposeidonas\LaravelParasutApi\Models\Other;
 
 use Illuminate\Support\Facades\Http;
+use Theposeidonas\LaravelParasutApi\ParasutV4;
 
 /**
  * API HOME
- * https://apidocs.parasut.com/#tag/showTrackableJob
+ * https://apidocs.parasut.com/#tag/TrackableJobs
  */
-class TrackableJob
+class TrackableJob extends ParasutV4
 {
     /**
      * @var string
      */
-    private string $token;
-    /**
-     * @var array
-     */
-    private array $config;
-    /**
-     * @var string
-     */
-    private string $baseUrl;
+    private string $serviceUrl;
 
     /**
-     * @param $token
      * @param $config
      */
-    public function __construct($token, $config)
+    public function __construct($config)
     {
-        $this->token = $token;
-        $this->config = $config;
-        $this->baseUrl = 'https://api.parasut.com/v4/'.$this->config['company_id'].'/trackable_jobs';
+        parent::__construct($config);
+        $this->serviceUrl = $this->config['api_url'].$this->config['company_id'].'/trackable_jobs';
     }
 
     /**
+     * @param string $id
      * @return array
      */
-    public function show($id): array
+    public function show(string $id): array
     {
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$this->token,
             'Content-Type' => 'application/json',
-        ])->get($this->baseUrl.'/'.$id);
+        ])->get($this->serviceUrl.'/'.$id);
         return $this->handleResponse($response);
     }
 
-    /**
-     * @param $response
-     * @return array
-     */
-    public function handleResponse($response): array
-    {
-        if ($response->successful()) {
-            return [
-                'success' => true,
-                'error' => false,
-                'body' => json_decode($response->body()),
-                'status' => $response->status()
-            ];
-        } else {
-            return [
-                'success' => false,
-                'error' => true,
-                'body' => json_decode($response->body()),
-                'status' => $response->status(),
-            ];
-        }
-
-    }
 }

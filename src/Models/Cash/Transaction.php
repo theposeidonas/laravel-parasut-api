@@ -3,84 +3,57 @@
 namespace Theposeidonas\LaravelParasutApi\Models\Cash;
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Validator;
+use Theposeidonas\LaravelParasutApi\ParasutV4;
 
 /**
  * İşlemler
  * https://apidocs.parasut.com/#tag/Transactions
  */
-class Transaction
+class Transaction extends ParasutV4
 {
     /**
      * @var string
      */
-    private string $token;
-    /**
-     * @var array
-     */
-    private array $config;
-    /**
-     * @var string
-     */
-    private string $baseUrl;
+    private string $serviceUrl;
 
     /**
-     * @param $token
      * @param $config
      */
-    public function __construct($token, $config)
+    public function __construct($config)
     {
-        $this->token = $token;
-        $this->config = $config;
-        $this->baseUrl = 'https://api.parasut.com/v4/'.$this->config['company_id'].'/transactions';
+        parent::__construct($config);
+        $this->serviceUrl = $this->config['api_url'].$this->config['company_id'].'/transactions';
     }
 
     /**
-     * @param $id
+     * @param string $id
+     * @param array $parameters
      * @return array
      */
-    public function show($id): array
+    public function show(string $id, array $parameters = []): array
     {
+        Validator::validate($parameters, [
+            'include' => 'nullable|string|in:debit_account,credit_account,payments'
+        ]);
+
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$this->token,
             'Content-Type' => 'application/json',
-        ])->get($this->baseUrl.'/'.$id);
+        ])->get($this->serviceUrl.'/'.$id, $parameters);
         return $this->handleResponse($response);
     }
 
     /**
-     * @param $id
+     * @param string $id
      * @return array
      */
-    public function delete($id): array
+    public function delete(string $id): array
     {
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$this->token,
             'Content-Type' => 'application/json',
-        ])->delete($this->baseUrl.'/'.$id);
+        ])->delete($this->serviceUrl.'/'.$id);
         return $this->handleResponse($response);
-    }
-
-    /**
-     * @param $response
-     * @return array
-     */
-    public function handleResponse($response): array
-    {
-        if ($response->successful()) {
-            return [
-                'success' => true,
-                'error' => false,
-                'body' => json_decode($response->body()),
-                'status' => $response->status()
-            ];
-        } else {
-            return [
-                'success' => false,
-                'error' => true,
-                'body' => json_decode($response->body()),
-                'status' => $response->status(),
-            ];
-        }
-
     }
 }

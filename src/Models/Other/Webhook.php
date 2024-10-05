@@ -3,35 +3,26 @@
 namespace Theposeidonas\LaravelParasutApi\Models\Other;
 
 use Illuminate\Support\Facades\Http;
+use Theposeidonas\LaravelParasutApi\ParasutV4;
 
 /**
  * Vergi
  * https://apidocs.parasut.com/#tag/Webhooks
  */
-class Webhook
+class Webhook extends ParasutV4
 {
     /**
      * @var string
      */
-    private string $token;
-    /**
-     * @var array
-     */
-    private array $config;
-    /**
-     * @var string
-     */
-    private string $baseUrl;
+    private string $serviceUrl;
 
     /**
-     * @param $token
      * @param $config
      */
-    public function __construct($token, $config)
+    public function __construct($config)
     {
-        $this->token = $token;
-        $this->config = $config;
-        $this->baseUrl = 'https://api.parasut.com/v4/'.$this->config['company_id'].'/webhooks';
+        parent::__construct($config);
+        $this->serviceUrl = $this->config['api_url'].$this->config['company_id'].'/webhooks';
     }
 
     /**
@@ -42,12 +33,12 @@ class Webhook
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$this->token,
             'Content-Type' => 'application/json',
-        ])->get($this->baseUrl);
+        ])->get($this->serviceUrl);
         return $this->handleResponse($response);
     }
 
     /**
-     * @param $data
+     * @param array $data
      * @return array
      */
     public function create($data): array
@@ -55,58 +46,35 @@ class Webhook
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$this->token,
             'Content-Type' => 'application/json',
-        ])->post($this->baseUrl, $data);
+        ])->post($this->serviceUrl, $data);
         return $this->handleResponse($response);
     }
 
     /**
-     * @param $id
-     * @param $data
+     * @param string $id
+     * @param array $data
      * @return array
      */
-    public function edit($id, $data): array
+    public function edit(string $id, $data): array
     {
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$this->token,
             'Content-Type' => 'application/json',
-        ])->put($this->baseUrl.'/'.$id, $data);
+        ])->put($this->serviceUrl.'/'.$id, $data);
         return $this->handleResponse($response);
     }
 
     /**
-     * @param $id
+     * @param string $id
      * @return array
      */
-    public function delete($id): array
+    public function delete(string $id): array
     {
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$this->token,
             'Content-Type' => 'application/json',
-        ])->delete($this->baseUrl.'/'.$id);
+        ])->delete($this->serviceUrl.'/'.$id);
         return $this->handleResponse($response);
     }
 
-    /**
-     * @param $response
-     * @return array
-     */
-    public function handleResponse($response): array
-    {
-        if ($response->successful()) {
-            return [
-                'success' => true,
-                'error' => false,
-                'body' => json_decode($response->body()),
-                'status' => $response->status()
-            ];
-        } else {
-            return [
-                'success' => false,
-                'error' => true,
-                'body' => json_decode($response->body()),
-                'status' => $response->status(),
-            ];
-        }
-
-    }
 }

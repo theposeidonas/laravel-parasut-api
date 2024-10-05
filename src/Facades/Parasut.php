@@ -26,5 +26,4 @@ class Parasut extends Facade
     {
         return ParasutV4::class;
     }
-
 }

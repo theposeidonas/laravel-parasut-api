@@ -35,9 +35,14 @@ use Theposeidonas\LaravelParasutApi\Models\Stock\Waybill;
 class ParasutV4 implements ParasutV4Conract
 {
     /**
-     * @var
+     * @array
      */
-    protected $config;
+    protected array $config;  
+    
+    /**
+     * @string
+     */
+    protected string $token;
 
     /**
      * @param $config
@@ -45,6 +50,7 @@ class ParasutV4 implements ParasutV4Conract
     public function __construct($config)
     {
         $this->config = $config;
+        $this->token = (new Auth($this->config))->getToken();
     }
 
     /**
@@ -52,7 +58,7 @@ class ParasutV4 implements ParasutV4Conract
      */
     public function Account(): Account
     {
-        return new Account(Auth::getToken($this->config), $this->config);
+        return new Account($this->config);
     }
 
     /**
@@ -60,7 +66,7 @@ class ParasutV4 implements ParasutV4Conract
      */
     public function Transaction(): Transaction
     {
-        return new Transaction(Auth::getToken($this->config), $this->config);
+        return new Transaction($this->config);
     }
 
     /**
@@ -68,7 +74,7 @@ class ParasutV4 implements ParasutV4Conract
      */
     public function Bank(): Bank
     {
-        return new Bank(Auth::getToken($this->config), $this->config);
+        return new Bank($this->config);
     }
 
     /**
@@ -76,7 +82,7 @@ class ParasutV4 implements ParasutV4Conract
      */
     public function Employee(): Employee
     {
-        return new Employee(Auth::getToken($this->config), $this->config);
+        return new Employee($this->config);
     }
 
     /**
@@ -84,7 +90,7 @@ class ParasutV4 implements ParasutV4Conract
      */
     public function Receipt(): Receipt
     {
-        return new Receipt(Auth::getToken($this->config), $this->config);
+        return new Receipt($this->config);
     }
 
     /**
@@ -92,7 +98,7 @@ class ParasutV4 implements ParasutV4Conract
      */
     public function Salary(): Salary
     {
-        return new Salary(Auth::getToken($this->config), $this->config);
+        return new Salary($this->config);
     }
 
     /**
@@ -100,7 +106,7 @@ class ParasutV4 implements ParasutV4Conract
      */
     public function Supplier(): Supplier
     {
-        return new Supplier(Auth::getToken($this->config), $this->config);
+        return new Supplier($this->config);
     }
 
     /**
@@ -108,7 +114,7 @@ class ParasutV4 implements ParasutV4Conract
      */
     public function Tax(): Tax
     {
-        return new Tax(Auth::getToken($this->config), $this->config);
+        return new Tax($this->config);
     }
 
     /**
@@ -116,7 +122,7 @@ class ParasutV4 implements ParasutV4Conract
      */
     public function EArchive(): EArchive
     {
-        return new EArchive(Auth::getToken($this->config), $this->config);
+        return new EArchive($this->config);
     }
 
     /**
@@ -124,7 +130,7 @@ class ParasutV4 implements ParasutV4Conract
      */
     public function EBill(): EBill
     {
-        return new EBill(Auth::getToken($this->config), $this->config);
+        return new EBill($this->config);
     }
 
     /**
@@ -132,7 +138,7 @@ class ParasutV4 implements ParasutV4Conract
      */
     public function ESmm(): ESmm
     {
-        return new ESmm(Auth::getToken($this->config), $this->config);
+        return new ESmm($this->config);
     }
 
     /**
@@ -140,7 +146,7 @@ class ParasutV4 implements ParasutV4Conract
      */
     public function Inbox(): Inbox
     {
-        return new Inbox(Auth::getToken($this->config), $this->config);
+        return new Inbox($this->config);
     }
 
     /**
@@ -148,7 +154,7 @@ class ParasutV4 implements ParasutV4Conract
      */
     public function Bill(): Bill
     {
-        return new Bill(Auth::getToken($this->config), $this->config);
+        return new Bill($this->config);
     }
 
     /**
@@ -156,7 +162,7 @@ class ParasutV4 implements ParasutV4Conract
      */
     public function Customer(): Customer
     {
-        return new Customer(Auth::getToken($this->config), $this->config);
+        return new Customer($this->config);
     }
 
     /**
@@ -164,7 +170,7 @@ class ParasutV4 implements ParasutV4Conract
      */
     public function Category(): Category
     {
-        return new Category(Auth::getToken($this->config), $this->config);
+        return new Category($this->config);
     }
 
     /**
@@ -172,7 +178,7 @@ class ParasutV4 implements ParasutV4Conract
      */
     public function Tag(): Tag
     {
-        return new Tag(Auth::getToken($this->config), $this->config);
+        return new Tag($this->config);
     }
 
     /**
@@ -180,7 +186,7 @@ class ParasutV4 implements ParasutV4Conract
      */
     public function Product(): Product
     {
-        return new Product(Auth::getToken($this->config), $this->config);
+        return new Product($this->config);
     }
 
     /**
@@ -188,7 +194,7 @@ class ParasutV4 implements ParasutV4Conract
      */
     public function StockMovement(): StockMovement
     {
-        return new StockMovement(Auth::getToken($this->config), $this->config);
+        return new StockMovement($this->config);
     }
 
     /**
@@ -196,7 +202,7 @@ class ParasutV4 implements ParasutV4Conract
      */
     public function Warehouse(): Warehouse
     {
-        return new Warehouse(Auth::getToken($this->config), $this->config);
+        return new Warehouse($this->config);
     }
 
     /**
@@ -204,7 +210,7 @@ class ParasutV4 implements ParasutV4Conract
      */
     public function Waybill(): Waybill
     {
-        return new Waybill(Auth::getToken($this->config), $this->config);
+        return new Waybill($this->config);
     }
 
     /**
@@ -212,7 +218,7 @@ class ParasutV4 implements ParasutV4Conract
      */
     public function ApiHome(): ApiHome
     {
-        return new ApiHome(Auth::getToken($this->config), $this->config);
+        return new ApiHome($this->config);
     }
 
     /**
@@ -220,7 +226,7 @@ class ParasutV4 implements ParasutV4Conract
      */
     public function TrackableJob(): TrackableJob
     {
-        return new TrackableJob(Auth::getToken($this->config), $this->config);
+        return new TrackableJob($this->config);
     }
 
     /**
@@ -228,6 +234,20 @@ class ParasutV4 implements ParasutV4Conract
      */
     public function Webhook(): Webhook
     {
-        return new Webhook(Auth::getToken($this->config), $this->config);
+        return new Webhook($this->config);
+    }
+
+    /**
+     * @param $response
+     * @return array
+     */
+    public function handleResponse($response): array
+    {
+        return [
+            'success' => $response->successful(),
+            'error' => !$response->successful(),
+            'body' => json_decode($response->body()),
+            'status' => $response->status()
+        ];
     }
 }

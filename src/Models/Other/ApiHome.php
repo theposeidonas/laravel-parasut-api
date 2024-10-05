@@ -3,70 +3,43 @@
 namespace Theposeidonas\LaravelParasutApi\Models\Other;
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Validator;
+use Theposeidonas\LaravelParasutApi\ParasutV4;
 
 /**
  * API HOME
  * https://apidocs.parasut.com/#tag/ApiHome
  */
-class ApiHome
+class ApiHome extends ParasutV4
 {
     /**
      * @var string
      */
-    private string $token;
-    /**
-     * @var array
-     */
-    private array $config;
-    /**
-     * @var string
-     */
-    private string $baseUrl;
+    private string $serviceUrl;
 
     /**
-     * @param $token
      * @param $config
      */
-    public function __construct($token, $config)
+    public function __construct($config)
     {
-        $this->token = $token;
-        $this->config = $config;
-        $this->baseUrl = 'https://api.parasut.com/v4/me';
+        parent::__construct($config);
+        $this->serviceUrl = $this->config['api_url'].'me';
     }
 
     /**
+     * @param array $parameters
      * @return array
      */
-    public function index(): array
+    public function index(array $parameters = []): array
     {
+        Validator::validate($parameters, [
+            'include' => 'nullable|string|in:user_roles,companies,profile'
+        ]);
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$this->token,
             'Content-Type' => 'application/json',
-        ])->get($this->baseUrl);
+        ])->get($this->serviceUrl, $parameters);
         return $this->handleResponse($response);
     }
 
-    /**
-     * @param $response
-     * @return array
-     */
-    public function handleResponse($response): array
-    {
-        if ($response->successful()) {
-            return [
-                'success' => true,
-                'error' => false,
-                'body' => json_decode($response->body()),
-                'status' => $response->status()
-            ];
-        } else {
-            return [
-                'success' => false,
-                'error' => true,
-                'body' => json_decode($response->body()),
-                'status' => $response->status(),
-            ];
-        }
-
-    }
 }

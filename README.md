@@ -183,16 +183,45 @@ Array
 )
 ```
 
-Yani geri dönüş yapan işlemi şu şekilde sorgulayabilirsiniz;
+##### Query Parameters ()
+
+Filtreleme ve query parametrelerini gönderme v1.2.0-beta ile dahil edilmiştir. Artık dökümanlarda yazan <b>Query Parameters</b> yani URL sonuna eklenen parametreleri gönderebilirsiniz. Parametreler zorunlu değildir fakat gönderdiğiniz endpoint'e göre değişiklik gösterilir ve doğrulanır. Gerekenden farklı bir parametre gönderemezsiniz.
+
+UYARI: v1.2.0'dan önce Inbox içerisinde vkn ile gelen parametre kodu değiştirildi. Yani eğer projenizde ```Parasut::Inbox->index($vkn)``` şeklinde bir kullanım yapıyorsanız, bunu uygun şekilde aşağıdaki gibi bir array olarak göndermeniz gerekiyor.
+
 ```php
-if($response['success'])
-{
-    // İşlem başarılı ise yapılacak şeyler
-}
-$customer = Parasut::Customer()->show($response['body']->data->id);
-echo $customer['body']->data->attributes->name; // Oluşturulan müşterinin ismini görme
+$parameters = [
+    'filter' => [
+        'vkn' => 1234567890 // Sadece integer kabul edilir.
+    ],
+    // Bu kısım zorunlu değil.
+    'page' => [ 
+        'number' => 1,
+        'size'=> 15
+    ]
+];
 
+Parasut::Inbox->index($parameters);
+```
 
+Örnek Parametre Gönderimi
+```php
+$parameters = [
+            'filter' => [
+                'name' => 'isim',
+                'currency' => 'TRY',
+                'bank_name' => 'Banka ismi',
+                'bank_branch' => 'Banka Şubesi',
+                'account_type' => 'Hesap Tipi',
+                'iban' => 'TR00 0000 0000 0000 0000 0000 00'
+            ],
+            'sort' => 'balance',
+            'page' => [
+                'number' => 1,
+                'size' => 15
+            ]
+        ];
+$response = Parasut::Account()->index($id, $parameters);
 ```
 <p align="right">(<a href="#readme-top">Başa dön</a>)</p>
 
@@ -202,41 +231,7 @@ Eksikleri ve hataları Issues kısmından yazabilirsiniz.
 - [x] Fonksiyonlar dahil edildi
 - [x] Eksik diğer kısımlar eklendi. (Others)
 - [x] Staging fonksiyonları çıkartıldı.
-- [ ] Fonksiyonların ekstra filtreleri dahil edilecek (Query Parameters)
-
-### Changelog
-
-#### V1.0.3
-
-**30 Haziran 2024**
-
-- E-Fatura gelen kutusunda parametre olarak VKN eklendi.(**[safakocamanoglu](https://github.com/safakocamanoglu)**'na teşekkürler.)
-
-#### V1.0.2
-
-**11 Mart 2024**
-
-- Others altındaki fonksiyonlar eklendi.
-    - ApiHome - TrackableJob - Webhook
-- Config dosyasından staging çıkartıldı. (Artık kullanılmıyor)
-- composer.json'a gereklilikler eklendi.
-
-#### V1.0.1
-
-**22 Ocak 2024**
-
-- Satış Faturasında unutulan pay() fonksiyonu eklendi.
-
-
-#### V1.0.0
-
-**20 Ocak 2024**
-
-- Initial Release
-
-
-
-<p align="right">(<a href="#readme-top">Başa dön</a>)</p>
+- [x] Fonksiyonların ekstra filtreleri dahil edilecek (Query Parameters)
 
 <!-- LICENSE -->
 ## Lisanslama
