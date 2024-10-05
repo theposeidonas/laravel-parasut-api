@@ -20,4 +20,10 @@ jobs:
         run: composer install --prefer-dist --no-progress --no-suggest
 
       - name: Run PHPUnit tests
+        env:
+          PARASUT_USERNAME: ${{ secrets.PARASUT_USERNAME }}
+          PARASUT_PASSWORD: ${{ secrets.PARASUT_PASSWORD }}
+          PARASUT_COMPANY_ID: ${{ secrets.PARASUT_COMPANY_ID }}
+          PARASUT_CLIENT_ID: ${{ secrets.PARASUT_CLIENT_ID }}
+          PARASUT_CLIENT_SECRET: ${{ secrets.PARASUT_CLIENT_SECRET }}
         run: composer test
