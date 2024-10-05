@@ -26,4 +26,5 @@ jobs:
           PARASUT_COMPANY_ID: ${{ secrets.PARASUT_COMPANY_ID }}
           PARASUT_CLIENT_ID: ${{ secrets.PARASUT_CLIENT_ID }}
           PARASUT_CLIENT_SECRET: ${{ secrets.PARASUT_CLIENT_SECRET }}
+          PARASUT_REDIRECT_URI: ${{ secrets.PARASUT_REDIRECT_URI }}
         run: composer test

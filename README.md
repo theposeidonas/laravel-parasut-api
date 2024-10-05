@@ -20,6 +20,8 @@
 
 [![Laravel][Laravel.com]][Laravel-url]
 ![Packagist Downloads (custom server)][downloads-url]
+![Tests](https://img.shields.io/github/actions/workflow/status/theposeidonas/laravel-parasut-api/phpunit.yml?style=for-the-badge&logo=github)
+
 
 
   <p align="center">
@@ -39,6 +41,8 @@
 # Laravel Paraşüt API 
 
 Bu proje, Laravel için oluşturulmuş kolayca Paraşüt V4 API ile bağlantı kurmanızı sağlayacak bir paket. Paraşüt API bilgilerinizi .env dosyasına girdikten sonra tekrar tekrar Auth işlemleri ile uğraşmadan kolayca istediğiniz fonksiyonu istediğiniz yerde çalıştırabilirsiniz.
+
+Please go to the README.en.md file to read the English documentation.
 
 ### Neden ihtiyaç var?
 
@@ -192,7 +196,8 @@ UYARI: v1.2.0'dan önce Inbox içerisinde vkn ile gelen parametre kodu değişti
 ```php
 $parameters = [
     'filter' => [
-        'vkn' => 1234567890 // Sadece integer kabul edilir.
+        // Sadece integer kabul edilir.
+        'vkn' => 1234567890 
     ],
     // Bu kısım zorunlu değil.
     'page' => [ 
@@ -245,7 +250,7 @@ MIT Lisansı altında dağıtılmaktadır. Daha fazla bilgi için 'LICENSE' dosy
 <!-- CONTACT -->
 ## İletişim
 
-Baran Arda - [@theposeidonas](https://twitter.com/theposeidonas) - info@baranarda.com
+Baran Arda - [@theposeidonas](https://twitter.com/theposeidonas) - baran@webremium.com
 
 Proje Linki: [https://github.com/theposeidonas/laravel-parasut-api](https://github.com/theposeidonas/laravel-parasut-api)
 
