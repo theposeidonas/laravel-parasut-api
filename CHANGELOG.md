@@ -1,5 +1,14 @@
 ### Changelog
 
+#### V1.2.1
+
+**7 Ekim 2024**
+
+- EArchive, EBill ve ESmm modüllerindeki PDF fonksiyonları düzeltildi.
+- İlgili testler düzeltildi
+- Github Actions dosyası düzeltildi.
+
+
 #### V1.2.0-beta
 
 **5 Ekim 2024**

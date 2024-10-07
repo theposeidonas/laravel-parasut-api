@@ -68,12 +68,7 @@ class EArchive extends ParasutV4
             'Content-Type' => 'application/json',
         ])->get($this->serviceUrl.'/'.$id.'/pdf');
 
-        return [
-            'success' => $response->successful(),
-            'error' => !$response->successful(),
-            'body' => $response->body(),
-            'status' => $response->status()
-        ];
+        return $this->handleResponse($response);
     }
 
 }

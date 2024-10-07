@@ -137,6 +137,10 @@ Parasut::StockMovement();   // Stock Movement           https://apidocs.parasut.
 Parasut::Category();        // Category                 https://apidocs.parasut.com/#tag/ItemCategories
 Parasut::Tag();             // Tag                      https://apidocs.parasut.com/#tag/Tags
 
+/* Other */
+Parasut::ApiHome();         // Api Home                 https://apidocs.parasut.com/#tag/ApiHome
+Parasut::TrackableJob();    // Trackable Job            https://apidocs.parasut.com/#tag/TrackableJobs
+Parasut::Webhook();         // Webhooks                 https://apidocs.parasut.com/#tag/Webhooks
 ```
 
 _Apart from these, to check the stock level of products, you need to use ```Parasut::Product()->inventory($id); ```_

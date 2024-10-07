@@ -67,12 +67,7 @@ class ESmm extends ParasutV4
             'Authorization' => 'Bearer '.$this->token,
             'Content-Type' => 'application/pdf',
         ])->get($this->serviceUrl.'/'.$id.'/pdf');
-        return [
-            'success' => $response->successful(),
-            'error' => !$response->successful(),
-            'body' => $response->body(),
-            'status' => $response->status()
-        ];
+        return $this->handleResponse($response);
     }
 
 }

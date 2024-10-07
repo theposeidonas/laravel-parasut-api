@@ -47,12 +47,14 @@ class ESmmTest extends BaseTest
     public function test_show_esmm_pdf()
     {
         Http::fake([
-            config('parasut.api_url').config('parasut.company_id').'/e_smms/1/pdf' => Http::response('PDF content', 200)
+            config('parasut.api_url').config('parasut.company_id').'/e_smms/1/pdf' => Http::response([
+                'data' => ['id' => '1', 'type' => 'e_document_pdfs', 'attributes' => ['url' => 'pdf-url123.pdf', 'expires_at'=>'2024-10-07T09:57:49Z']]
+            ], 200)
         ]);
 
         $response = $this->eSmm->showPDF('1');
 
         $this->assertTrue($response['success']);
-        $this->assertEquals('PDF content', $response['body']);
+        $this->assertEquals('pdf-url123.pdf', $response['body']->data->attributes->url);
     }
 }

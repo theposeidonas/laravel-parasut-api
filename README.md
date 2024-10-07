@@ -136,6 +136,11 @@ Parasut::StockMovement();   // Stok Hareketi            https://apidocs.parasut.
 /* Ayarlar */
 Parasut::Category();        // Kategori                 https://apidocs.parasut.com/#tag/ItemCategories
 Parasut::Tag();             // Etiket                   https://apidocs.parasut.com/#tag/Tags
+
+/* Other */
+Parasut::ApiHome();         // Api Home                 https://apidocs.parasut.com/#tag/ApiHome
+Parasut::TrackableJob();    // Trackable Job            https://apidocs.parasut.com/#tag/TrackableJobs
+Parasut::Webhook();         // Webhooks                 https://apidocs.parasut.com/#tag/Webhooks
 ```
 
 _Bunlar dışında kalan, ürünlerin stok seviyesini kontrol etmek için ```Parasut::Product()->inventory($id); ``` kullanmanız gerekir._

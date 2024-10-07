@@ -68,12 +68,7 @@ class EBill extends ParasutV4
             'Content-Type' => 'application/pdf',
         ])->get($this->serviceUrl.'/'.$id.'/pdf');
 
-        return [
-            'success' => $response->successful(),
-            'error' => !$response->successful(),
-            'body' => $response->body(),
-            'status' => $response->status()
-        ];
+        return $this->handleResponse($response);
     }
 
 
