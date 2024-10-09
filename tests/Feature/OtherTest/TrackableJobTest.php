@@ -2,8 +2,8 @@
 
 namespace Theposeidonas\LaravelParasutApi\Tests\Feature\OtherTest;
 
-use Theposeidonas\LaravelParasutApi\Models\Other\TrackableJob;
 use Illuminate\Support\Facades\Http;
+use Theposeidonas\LaravelParasutApi\Models\Other\TrackableJob;
 use Theposeidonas\LaravelParasutApi\Tests\Feature\BaseTest;
 
 class TrackableJobTest extends BaseTest
@@ -23,9 +23,9 @@ class TrackableJobTest extends BaseTest
                 'data' => [
                     'id' => '1',
                     'type' => 'trackable_job',
-                    'attributes' => ['status' => 'completed']
-                ]
-            ], 200)
+                    'attributes' => ['status' => 'completed'],
+                ],
+            ], 200),
         ]);
 
         $response = $this->trackableJob->show('1');

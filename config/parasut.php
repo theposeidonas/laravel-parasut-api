@@ -9,7 +9,7 @@
 |
 */
 
-return  [
+return [
     'username' => env('PARASUT_USERNAME'),
     'password' => env('PARASUT_PASSWORD'),
     'company_id' => env('PARASUT_COMPANY_ID'),

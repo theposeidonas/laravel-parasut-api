@@ -2,8 +2,8 @@
 
 namespace Theposeidonas\LaravelParasutApi\Tests\Feature\CashTest;
 
-use Theposeidonas\LaravelParasutApi\Models\Cash\Account;
 use Illuminate\Support\Facades\Http;
+use Theposeidonas\LaravelParasutApi\Models\Cash\Account;
 use Theposeidonas\LaravelParasutApi\Tests\Feature\BaseTest;
 
 class AccountTest extends BaseTest
@@ -22,9 +22,9 @@ class AccountTest extends BaseTest
             config('parasut.api_url').config('parasut.company_id').'/accounts' => Http::response([
                 'data' => [
                     ['id' => '1', 'name' => 'Test Account'],
-                    ['id' => '2', 'name' => 'Another Account']
-                ]
-            ], 200)
+                    ['id' => '2', 'name' => 'Another Account'],
+                ],
+            ], 200),
         ]);
 
         $response = $this->account->index();
@@ -38,8 +38,8 @@ class AccountTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/accounts/1' => Http::response([
-                'data' => ['id' => '1', 'name' => 'Test Account']
-            ], 200)
+                'data' => ['id' => '1', 'name' => 'Test Account'],
+            ], 200),
         ]);
 
         $response = $this->account->show('1');
@@ -52,8 +52,8 @@ class AccountTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/accounts' => Http::response([
-                'data' => ['id' => '1', 'name' => 'New Account']
-            ], 201)
+                'data' => ['id' => '1', 'name' => 'New Account'],
+            ], 201),
         ]);
 
         $response = $this->account->create(['name' => 'New Account']);
@@ -66,8 +66,8 @@ class AccountTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/accounts/1' => Http::response([
-                'data' => ['id' => '1', 'name' => 'Updated Account']
-            ], 200)
+                'data' => ['id' => '1', 'name' => 'Updated Account'],
+            ], 200),
         ]);
 
         $response = $this->account->edit('1', ['name' => 'Updated Account']);
@@ -79,7 +79,7 @@ class AccountTest extends BaseTest
     public function test_delete()
     {
         Http::fake([
-            config('parasut.api_url').config('parasut.company_id').'/accounts/1' => Http::response([], 204)
+            config('parasut.api_url').config('parasut.company_id').'/accounts/1' => Http::response([], 204),
         ]);
 
         $response = $this->account->delete('1');

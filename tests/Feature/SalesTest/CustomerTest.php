@@ -2,8 +2,8 @@
 
 namespace Theposeidonas\LaravelParasutApi\Tests\Feature\SalesTest;
 
-use Theposeidonas\LaravelParasutApi\Models\Sales\Customer;
 use Illuminate\Support\Facades\Http;
+use Theposeidonas\LaravelParasutApi\Models\Sales\Customer;
 use Theposeidonas\LaravelParasutApi\Tests\Feature\BaseTest;
 
 class CustomerTest extends BaseTest
@@ -23,8 +23,8 @@ class CustomerTest extends BaseTest
                 'data' => [
                     ['id' => '1', 'type' => 'contact', 'attributes' => ['name' => 'Customer 1']],
                     ['id' => '2', 'type' => 'contact', 'attributes' => ['name' => 'Customer 2']],
-                ]
-            ], 200)
+                ],
+            ], 200),
         ]);
 
         $response = $this->customer->index();
@@ -38,8 +38,8 @@ class CustomerTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/contacts' => Http::response([
-                'data' => ['id' => '1', 'type' => 'contact', 'attributes' => ['name' => 'New Customer']]
-            ], 201)
+                'data' => ['id' => '1', 'type' => 'contact', 'attributes' => ['name' => 'New Customer']],
+            ], 201),
         ]);
 
         $response = $this->customer->create(['name' => 'New Customer'], []);
@@ -52,8 +52,8 @@ class CustomerTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/contacts/1' => Http::response([
-                'data' => ['id' => '1', 'type' => 'contact', 'attributes' => ['name' => 'Customer 1']]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'contact', 'attributes' => ['name' => 'Customer 1']],
+            ], 200),
         ]);
 
         $response = $this->customer->show('1');
@@ -66,8 +66,8 @@ class CustomerTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/contacts/1' => Http::response([
-                'data' => ['id' => '1', 'type' => 'contact', 'attributes' => ['name' => 'Updated Customer']]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'contact', 'attributes' => ['name' => 'Updated Customer']],
+            ], 200),
         ]);
 
         $response = $this->customer->edit('1', ['name' => 'Updated Customer'], []);
@@ -79,7 +79,7 @@ class CustomerTest extends BaseTest
     public function test_delete_customer()
     {
         Http::fake([
-            config('parasut.api_url').config('parasut.company_id').'/contacts/1' => Http::response([], 204)
+            config('parasut.api_url').config('parasut.company_id').'/contacts/1' => Http::response([], 204),
         ]);
 
         $response = $this->customer->delete('1');

@@ -2,8 +2,8 @@
 
 namespace Theposeidonas\LaravelParasutApi\Tests\Feature\StockTest;
 
-use Theposeidonas\LaravelParasutApi\Models\Stock\Warehouse;
 use Illuminate\Support\Facades\Http;
+use Theposeidonas\LaravelParasutApi\Models\Stock\Warehouse;
 use Theposeidonas\LaravelParasutApi\Tests\Feature\BaseTest;
 
 class WarehouseTest extends BaseTest
@@ -23,8 +23,8 @@ class WarehouseTest extends BaseTest
                 'data' => [
                     ['id' => '1', 'type' => 'warehouse', 'attributes' => ['name' => 'Warehouse 1']],
                     ['id' => '2', 'type' => 'warehouse', 'attributes' => ['name' => 'Warehouse 2']],
-                ]
-            ], 200)
+                ],
+            ], 200),
         ]);
 
         $response = $this->warehouse->index();
@@ -38,8 +38,8 @@ class WarehouseTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/warehouses' => Http::response([
-                'data' => ['id' => '1', 'type' => 'warehouse', 'attributes' => ['name' => 'New Warehouse']]
-            ], 201)
+                'data' => ['id' => '1', 'type' => 'warehouse', 'attributes' => ['name' => 'New Warehouse']],
+            ], 201),
         ]);
 
         $response = $this->warehouse->create(['name' => 'New Warehouse']);
@@ -52,8 +52,8 @@ class WarehouseTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/warehouses/1' => Http::response([
-                'data' => ['id' => '1', 'type' => 'warehouse', 'attributes' => ['name' => 'Warehouse 1']]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'warehouse', 'attributes' => ['name' => 'Warehouse 1']],
+            ], 200),
         ]);
 
         $response = $this->warehouse->show('1');
@@ -66,8 +66,8 @@ class WarehouseTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/warehouses/1' => Http::response([
-                'data' => ['id' => '1', 'type' => 'warehouse', 'attributes' => ['name' => 'Updated Warehouse']]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'warehouse', 'attributes' => ['name' => 'Updated Warehouse']],
+            ], 200),
         ]);
 
         $response = $this->warehouse->edit('1', ['name' => 'Updated Warehouse']);
@@ -79,7 +79,7 @@ class WarehouseTest extends BaseTest
     public function test_delete_warehouse()
     {
         Http::fake([
-            config('parasut.api_url').config('parasut.company_id').'/warehouses/1' => Http::response([], 204)
+            config('parasut.api_url').config('parasut.company_id').'/warehouses/1' => Http::response([], 204),
         ]);
 
         $response = $this->warehouse->delete('1');

@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Http;
 use Theposeidonas\LaravelParasutApi\Auth;
 
 class ParasutAuthenticationTest extends BaseTest
-
 {
     public function test_get_token_with_cached_token()
     {
@@ -38,7 +37,7 @@ class ParasutAuthenticationTest extends BaseTest
             'https://api.parasut.com/oauth/token' => Http::response([
                 'access_token' => 'new_access_token',
                 'expires_in' => 3600,
-            ], 200)
+            ], 200),
         ]);
 
         $auth = new Auth(config('parasut'));
@@ -56,7 +55,7 @@ class ParasutAuthenticationTest extends BaseTest
             ->andReturn(null);
 
         Http::fake([
-            'https://api.parasut.com/oauth/token' => Http::response(null, 400)
+            'https://api.parasut.com/oauth/token' => Http::response(null, 400),
         ]);
 
         $auth = new Auth(config('parasut'));

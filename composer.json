@@ -3,7 +3,7 @@
     "description": "Paraşüt v4 API for Laravel Projects",
     "keywords": ["laravel", "Parasut", "Paraşüt"],
     "license": "MIT",
-    "version": "v1.2.1",
+    "version": "v1.2.2",
     "authors": [
         {
             "name": "Baran Arda",
@@ -28,6 +28,7 @@
         "test": "phpunit"
     },
     "require-dev": {
+        "laravel/pint": "^1.18",
         "orchestra/testbench": "^6.0",
         "phpunit/phpunit": "^8.0"
     },

@@ -2,8 +2,8 @@
 
 namespace Theposeidonas\LaravelParasutApi\Tests\Feature\FormalizationTest;
 
-use Theposeidonas\LaravelParasutApi\Models\Formalization\EBill;
 use Illuminate\Support\Facades\Http;
+use Theposeidonas\LaravelParasutApi\Models\Formalization\EBill;
 use Theposeidonas\LaravelParasutApi\Tests\Feature\BaseTest;
 
 class EBillTest extends BaseTest
@@ -20,8 +20,8 @@ class EBillTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/e_invoices' => Http::response([
-                'data' => ['id' => '1', 'type' => 'e_invoice', 'attributes' => ['status' => 'created']]
-            ], 201)
+                'data' => ['id' => '1', 'type' => 'e_invoice', 'attributes' => ['status' => 'created']],
+            ], 201),
         ]);
 
         $response = $this->eBill->create(['invoice_data' => 'test_data']);
@@ -34,8 +34,8 @@ class EBillTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/e_invoices/1' => Http::response([
-                'data' => ['id' => '1', 'type' => 'e_invoice', 'attributes' => ['status' => 'approved']]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'e_invoice', 'attributes' => ['status' => 'approved']],
+            ], 200),
         ]);
 
         $response = $this->eBill->show('1');
@@ -48,8 +48,8 @@ class EBillTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/e_invoices/1/pdf' => Http::response([
-                'data' => ['id' => '1', 'type' => 'e_document_pdfs', 'attributes' => ['url' => 'pdf-url123.pdf', 'expires_at'=>'2024-10-07T09:57:49Z']]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'e_document_pdfs', 'attributes' => ['url' => 'pdf-url123.pdf', 'expires_at' => '2024-10-07T09:57:49Z']],
+            ], 200),
         ]);
 
         $response = $this->eBill->showPDF('1');

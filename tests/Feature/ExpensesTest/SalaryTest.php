@@ -2,8 +2,8 @@
 
 namespace Theposeidonas\LaravelParasutApi\Tests\Feature\ExpensesTest;
 
-use Theposeidonas\LaravelParasutApi\Models\Expenses\Salary;
 use Illuminate\Support\Facades\Http;
+use Theposeidonas\LaravelParasutApi\Models\Expenses\Salary;
 use Theposeidonas\LaravelParasutApi\Tests\Feature\BaseTest;
 
 class SalaryTest extends BaseTest
@@ -23,8 +23,8 @@ class SalaryTest extends BaseTest
                 'data' => [
                     ['id' => '1', 'type' => 'salary', 'attributes' => ['net_total' => 1000]],
                     ['id' => '2', 'type' => 'salary', 'attributes' => ['net_total' => 2000]],
-                ]
-            ], 200)
+                ],
+            ], 200),
         ]);
 
         $response = $this->salary->index();
@@ -38,8 +38,8 @@ class SalaryTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/salaries' => Http::response([
-                'data' => ['id' => '1', 'type' => 'salary', 'attributes' => ['net_total' => 1500]]
-            ], 201)
+                'data' => ['id' => '1', 'type' => 'salary', 'attributes' => ['net_total' => 1500]],
+            ], 201),
         ]);
 
         $response = $this->salary->create(['net_total' => 1500]);
@@ -52,8 +52,8 @@ class SalaryTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/salaries/1' => Http::response([
-                'data' => ['id' => '1', 'type' => 'salary', 'attributes' => ['net_total' => 1000]]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'salary', 'attributes' => ['net_total' => 1000]],
+            ], 200),
         ]);
 
         $response = $this->salary->show('1');
@@ -66,8 +66,8 @@ class SalaryTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/salaries/1' => Http::response([
-                'data' => ['id' => '1', 'type' => 'salary', 'attributes' => ['net_total' => 2000]]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'salary', 'attributes' => ['net_total' => 2000]],
+            ], 200),
         ]);
 
         $response = $this->salary->edit('1', ['net_total' => 2000]);
@@ -79,7 +79,7 @@ class SalaryTest extends BaseTest
     public function test_delete_salary()
     {
         Http::fake([
-            config('parasut.api_url').config('parasut.company_id').'/salaries/1' => Http::response([], 204)
+            config('parasut.api_url').config('parasut.company_id').'/salaries/1' => Http::response([], 204),
         ]);
 
         $response = $this->salary->delete('1');
@@ -92,8 +92,8 @@ class SalaryTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/salaries/1/archive' => Http::response([
-                'data' => ['id' => '1', 'type' => 'salary', 'attributes' => ['archived' => true]]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'salary', 'attributes' => ['archived' => true]],
+            ], 200),
         ]);
 
         $response = $this->salary->archive('1');
@@ -106,8 +106,8 @@ class SalaryTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/salaries/1/unarchive' => Http::response([
-                'data' => ['id' => '1', 'type' => 'salary', 'attributes' => ['archived' => false]]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'salary', 'attributes' => ['archived' => false]],
+            ], 200),
         ]);
 
         $response = $this->salary->unarchive('1');
@@ -120,8 +120,8 @@ class SalaryTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/salaries/1/payments' => Http::response([
-                'data' => ['id' => '1', 'type' => 'payment', 'attributes' => ['amount' => 1000]]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'payment', 'attributes' => ['amount' => 1000]],
+            ], 200),
         ]);
 
         $response = $this->salary->pay('1', ['amount' => 1000]);

@@ -2,8 +2,8 @@
 
 namespace Theposeidonas\LaravelParasutApi\Tests\Feature\SalesTest;
 
-use Theposeidonas\LaravelParasutApi\Models\Sales\Bill;
 use Illuminate\Support\Facades\Http;
+use Theposeidonas\LaravelParasutApi\Models\Sales\Bill;
 use Theposeidonas\LaravelParasutApi\Tests\Feature\BaseTest;
 
 class BillTest extends BaseTest
@@ -23,8 +23,8 @@ class BillTest extends BaseTest
                 'data' => [
                     ['id' => '1', 'type' => 'sales_invoice', 'attributes' => ['amount' => 1000]],
                     ['id' => '2', 'type' => 'sales_invoice', 'attributes' => ['amount' => 2000]],
-                ]
-            ], 200)
+                ],
+            ], 200),
         ]);
 
         $response = $this->bill->index();
@@ -38,8 +38,8 @@ class BillTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/sales_invoices' => Http::response([
-                'data' => ['id' => '1', 'type' => 'sales_invoice', 'attributes' => ['amount' => 1500]]
-            ], 201)
+                'data' => ['id' => '1', 'type' => 'sales_invoice', 'attributes' => ['amount' => 1500]],
+            ], 201),
         ]);
 
         $response = $this->bill->create(['amount' => 1500]);
@@ -52,8 +52,8 @@ class BillTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/sales_invoices/1' => Http::response([
-                'data' => ['id' => '1', 'type' => 'sales_invoice', 'attributes' => ['amount' => 1000]]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'sales_invoice', 'attributes' => ['amount' => 1000]],
+            ], 200),
         ]);
 
         $response = $this->bill->show('1');
@@ -66,8 +66,8 @@ class BillTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/sales_invoices/1' => Http::response([
-                'data' => ['id' => '1', 'type' => 'sales_invoice', 'attributes' => ['amount' => 2000]]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'sales_invoice', 'attributes' => ['amount' => 2000]],
+            ], 200),
         ]);
 
         $response = $this->bill->edit('1', ['amount' => 2000]);
@@ -79,7 +79,7 @@ class BillTest extends BaseTest
     public function test_delete_bill()
     {
         Http::fake([
-            config('parasut.api_url').config('parasut.company_id').'/sales_invoices/1' => Http::response([], 204)
+            config('parasut.api_url').config('parasut.company_id').'/sales_invoices/1' => Http::response([], 204),
         ]);
 
         $response = $this->bill->delete('1');

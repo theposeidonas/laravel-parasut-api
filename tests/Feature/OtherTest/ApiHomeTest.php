@@ -2,8 +2,8 @@
 
 namespace Theposeidonas\LaravelParasutApi\Tests\Feature\OtherTest;
 
-use Theposeidonas\LaravelParasutApi\Models\Other\ApiHome;
 use Illuminate\Support\Facades\Http;
+use Theposeidonas\LaravelParasutApi\Models\Other\ApiHome;
 use Theposeidonas\LaravelParasutApi\Tests\Feature\BaseTest;
 
 class ApiHomeTest extends BaseTest
@@ -23,9 +23,9 @@ class ApiHomeTest extends BaseTest
                 'data' => [
                     'id' => '1',
                     'type' => 'api_home',
-                    'attributes' => ['user' => 'Test User']
-                ]
-            ], 200)
+                    'attributes' => ['user' => 'Test User'],
+                ],
+            ], 200),
         ]);
 
         $response = $this->apiHome->index();

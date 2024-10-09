@@ -2,8 +2,8 @@
 
 namespace Theposeidonas\LaravelParasutApi\Tests\Feature\ExpensesTest;
 
-use Theposeidonas\LaravelParasutApi\Models\Expenses\Employee;
 use Illuminate\Support\Facades\Http;
+use Theposeidonas\LaravelParasutApi\Models\Expenses\Employee;
 use Theposeidonas\LaravelParasutApi\Tests\Feature\BaseTest;
 
 class EmployeeTest extends BaseTest
@@ -20,8 +20,8 @@ class EmployeeTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/employees' => Http::response([
-                'data' => ['id' => '1', 'type' => 'employee', 'attributes' => ['name' => 'John Doe']]
-            ], 201)
+                'data' => ['id' => '1', 'type' => 'employee', 'attributes' => ['name' => 'John Doe']],
+            ], 201),
         ]);
 
         $response = $this->employee->create(['name' => 'John Doe']);
@@ -35,8 +35,8 @@ class EmployeeTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/employees/1' => Http::response([
-                'data' => ['id' => '1', 'type' => 'employee', 'attributes' => ['name' => 'John Doe']]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'employee', 'attributes' => ['name' => 'John Doe']],
+            ], 200),
         ]);
 
         $response = $this->employee->show('1');
@@ -50,8 +50,8 @@ class EmployeeTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/employees/1' => Http::response([
-                'data' => ['id' => '1', 'type' => 'employee', 'attributes' => ['name' => 'Jane Doe']]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'employee', 'attributes' => ['name' => 'Jane Doe']],
+            ], 200),
         ]);
 
         $response = $this->employee->edit('1', ['name' => 'Jane Doe']);
@@ -63,7 +63,7 @@ class EmployeeTest extends BaseTest
     public function test_delete_employee()
     {
         Http::fake([
-            config('parasut.api_url').config('parasut.company_id').'/employees/1' => Http::response([], 204)
+            config('parasut.api_url').config('parasut.company_id').'/employees/1' => Http::response([], 204),
         ]);
 
         $response = $this->employee->delete('1');
@@ -76,8 +76,8 @@ class EmployeeTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/employees/1/archive' => Http::response([
-                'data' => ['id' => '1', 'type' => 'employee', 'attributes' => ['archived' => true]]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'employee', 'attributes' => ['archived' => true]],
+            ], 200),
         ]);
 
         $response = $this->employee->archive('1');
@@ -90,8 +90,8 @@ class EmployeeTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/employees/1/unarchive' => Http::response([
-                'data' => ['id' => '1', 'type' => 'employee', 'attributes' => ['archived' => false]]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'employee', 'attributes' => ['archived' => false]],
+            ], 200),
         ]);
 
         $response = $this->employee->unarchive('1');

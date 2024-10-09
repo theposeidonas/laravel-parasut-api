@@ -2,8 +2,8 @@
 
 namespace Theposeidonas\LaravelParasutApi\Tests\Feature\StockTest;
 
-use Theposeidonas\LaravelParasutApi\Models\Stock\StockMovement;
 use Illuminate\Support\Facades\Http;
+use Theposeidonas\LaravelParasutApi\Models\Stock\StockMovement;
 use Theposeidonas\LaravelParasutApi\Tests\Feature\BaseTest;
 
 class StockMovementTest extends BaseTest
@@ -23,8 +23,8 @@ class StockMovementTest extends BaseTest
                 'data' => [
                     ['id' => '1', 'type' => 'stock_movement', 'attributes' => ['date' => '2024-01-01']],
                     ['id' => '2', 'type' => 'stock_movement', 'attributes' => ['date' => '2024-01-02']],
-                ]
-            ], 200)
+                ],
+            ], 200),
         ]);
 
         $response = $this->stockMovement->index();

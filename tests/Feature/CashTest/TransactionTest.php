@@ -2,8 +2,8 @@
 
 namespace Theposeidonas\LaravelParasutApi\Tests\Feature\CashTest;
 
-use Theposeidonas\LaravelParasutApi\Models\Cash\Transaction;
 use Illuminate\Support\Facades\Http;
+use Theposeidonas\LaravelParasutApi\Models\Cash\Transaction;
 use Theposeidonas\LaravelParasutApi\Tests\Feature\BaseTest;
 
 class TransactionTest extends BaseTest
@@ -20,8 +20,8 @@ class TransactionTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/transactions/1' => Http::response([
-                'data' => ['id' => '1', 'type' => 'transaction', 'attributes' => ['amount' => 100]]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'transaction', 'attributes' => ['amount' => 100]],
+            ], 200),
         ]);
 
         $response = $this->transaction->show('1');
@@ -34,7 +34,7 @@ class TransactionTest extends BaseTest
     public function test_delete_transaction()
     {
         Http::fake([
-            config('parasut.api_url').config('parasut.company_id').'/transactions/1' => Http::response([], 204)
+            config('parasut.api_url').config('parasut.company_id').'/transactions/1' => Http::response([], 204),
         ]);
 
         $response = $this->transaction->delete('1');

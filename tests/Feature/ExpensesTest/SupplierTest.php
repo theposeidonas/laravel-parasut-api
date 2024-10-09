@@ -2,8 +2,8 @@
 
 namespace Theposeidonas\LaravelParasutApi\Tests\Feature\ExpensesTest;
 
-use Theposeidonas\LaravelParasutApi\Models\Expenses\Supplier;
 use Illuminate\Support\Facades\Http;
+use Theposeidonas\LaravelParasutApi\Models\Expenses\Supplier;
 use Theposeidonas\LaravelParasutApi\Tests\Feature\BaseTest;
 
 class SupplierTest extends BaseTest
@@ -23,8 +23,8 @@ class SupplierTest extends BaseTest
                 'data' => [
                     ['id' => '1', 'type' => 'contact', 'attributes' => ['name' => 'Supplier 1']],
                     ['id' => '2', 'type' => 'contact', 'attributes' => ['name' => 'Supplier 2']],
-                ]
-            ], 200)
+                ],
+            ], 200),
         ]);
 
         $response = $this->supplier->index();
@@ -38,8 +38,8 @@ class SupplierTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/contacts' => Http::response([
-                'data' => ['id' => '1', 'type' => 'contact', 'attributes' => ['name' => 'New Supplier']]
-            ], 201)
+                'data' => ['id' => '1', 'type' => 'contact', 'attributes' => ['name' => 'New Supplier']],
+            ], 201),
         ]);
 
         $response = $this->supplier->create(['name' => 'New Supplier'], []);
@@ -52,8 +52,8 @@ class SupplierTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/contacts/1' => Http::response([
-                'data' => ['id' => '1', 'type' => 'contact', 'attributes' => ['name' => 'Supplier 1']]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'contact', 'attributes' => ['name' => 'Supplier 1']],
+            ], 200),
         ]);
 
         $response = $this->supplier->show('1');
@@ -66,8 +66,8 @@ class SupplierTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/contacts/1' => Http::response([
-                'data' => ['id' => '1', 'type' => 'contact', 'attributes' => ['name' => 'Updated Supplier']]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'contact', 'attributes' => ['name' => 'Updated Supplier']],
+            ], 200),
         ]);
 
         $response = $this->supplier->edit('1', ['name' => 'Updated Supplier'], []);
@@ -79,7 +79,7 @@ class SupplierTest extends BaseTest
     public function test_delete_supplier()
     {
         Http::fake([
-            config('parasut.api_url').config('parasut.company_id').'/contacts/1' => Http::response([], 204)
+            config('parasut.api_url').config('parasut.company_id').'/contacts/1' => Http::response([], 204),
         ]);
 
         $response = $this->supplier->delete('1');

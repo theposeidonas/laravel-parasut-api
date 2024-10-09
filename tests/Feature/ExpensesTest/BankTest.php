@@ -2,8 +2,8 @@
 
 namespace Theposeidonas\LaravelParasutApi\Tests\Feature\ExpensesTest;
 
-use Theposeidonas\LaravelParasutApi\Models\Expenses\Bank;
 use Illuminate\Support\Facades\Http;
+use Theposeidonas\LaravelParasutApi\Models\Expenses\Bank;
 use Theposeidonas\LaravelParasutApi\Tests\Feature\BaseTest;
 
 class BankTest extends BaseTest
@@ -20,8 +20,8 @@ class BankTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/bank_fees' => Http::response([
-                'data' => ['id' => '1', 'type' => 'bank_fee', 'attributes' => ['amount' => 100]]
-            ], 201)
+                'data' => ['id' => '1', 'type' => 'bank_fee', 'attributes' => ['amount' => 100]],
+            ], 201),
         ]);
 
         $response = $this->bank->create(['name' => 'New Bank Fee']);
@@ -35,8 +35,8 @@ class BankTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/bank_fees/1' => Http::response([
-                'data' => ['id' => '1', 'type' => 'bank_fee', 'attributes' => ['amount' => 100]]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'bank_fee', 'attributes' => ['amount' => 100]],
+            ], 200),
         ]);
 
         $response = $this->bank->show('1');
@@ -50,8 +50,8 @@ class BankTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/bank_fees/1' => Http::response([
-                'data' => ['id' => '1', 'type' => 'bank_fee', 'attributes' => ['amount' => 150]]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'bank_fee', 'attributes' => ['amount' => 150]],
+            ], 200),
         ]);
 
         $response = $this->bank->edit('1', ['amount' => 150]);
@@ -63,7 +63,7 @@ class BankTest extends BaseTest
     public function test_delete_bank_fee()
     {
         Http::fake([
-            config('parasut.api_url').config('parasut.company_id').'/bank_fees/1' => Http::response([], 204)
+            config('parasut.api_url').config('parasut.company_id').'/bank_fees/1' => Http::response([], 204),
         ]);
 
         $response = $this->bank->delete('1');
@@ -76,8 +76,8 @@ class BankTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/bank_fees/1/archive' => Http::response([
-                'data' => ['id' => '1', 'type' => 'bank_fee', 'attributes' => ['archived' => true]]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'bank_fee', 'attributes' => ['archived' => true]],
+            ], 200),
         ]);
 
         $response = $this->bank->archive('1');
@@ -90,8 +90,8 @@ class BankTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/bank_fees/1/unarchive' => Http::response([
-                'data' => ['id' => '1', 'type' => 'bank_fee', 'attributes' => ['archived' => false]]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'bank_fee', 'attributes' => ['archived' => false]],
+            ], 200),
         ]);
 
         $response = $this->bank->unarchive('1');
@@ -104,8 +104,8 @@ class BankTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/bank_fees/1/payments' => Http::response([
-                'data' => ['id' => '1', 'type' => 'payment', 'attributes' => ['amount' => 100]]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'payment', 'attributes' => ['amount' => 100]],
+            ], 200),
         ]);
 
         $response = $this->bank->pay('1', ['amount' => 100]);

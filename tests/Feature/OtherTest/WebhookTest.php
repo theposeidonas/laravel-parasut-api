@@ -2,8 +2,8 @@
 
 namespace Theposeidonas\LaravelParasutApi\Tests\Feature\OtherTest;
 
-use Theposeidonas\LaravelParasutApi\Models\Other\Webhook;
 use Illuminate\Support\Facades\Http;
+use Theposeidonas\LaravelParasutApi\Models\Other\Webhook;
 use Theposeidonas\LaravelParasutApi\Tests\Feature\BaseTest;
 
 class WebhookTest extends BaseTest
@@ -23,8 +23,8 @@ class WebhookTest extends BaseTest
                 'data' => [
                     ['id' => '1', 'type' => 'webhook', 'attributes' => ['url' => 'https://example.com/webhook1']],
                     ['id' => '2', 'type' => 'webhook', 'attributes' => ['url' => 'https://example.com/webhook2']],
-                ]
-            ], 200)
+                ],
+            ], 200),
         ]);
 
         $response = $this->webhook->index();
@@ -38,8 +38,8 @@ class WebhookTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/webhooks' => Http::response([
-                'data' => ['id' => '1', 'type' => 'webhook', 'attributes' => ['url' => 'https://example.com/webhook1']]
-            ], 201)
+                'data' => ['id' => '1', 'type' => 'webhook', 'attributes' => ['url' => 'https://example.com/webhook1']],
+            ], 201),
         ]);
 
         $response = $this->webhook->create(['url' => 'https://example.com/webhook1']);
@@ -52,8 +52,8 @@ class WebhookTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/webhooks/1' => Http::response([
-                'data' => ['id' => '1', 'type' => 'webhook', 'attributes' => ['url' => 'https://example.com/updated_webhook']]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'webhook', 'attributes' => ['url' => 'https://example.com/updated_webhook']],
+            ], 200),
         ]);
 
         $response = $this->webhook->edit('1', ['url' => 'https://example.com/updated_webhook']);
@@ -65,7 +65,7 @@ class WebhookTest extends BaseTest
     public function test_delete_webhook()
     {
         Http::fake([
-            config('parasut.api_url').config('parasut.company_id').'/webhooks/1' => Http::response([], 204)
+            config('parasut.api_url').config('parasut.company_id').'/webhooks/1' => Http::response([], 204),
         ]);
 
         $response = $this->webhook->delete('1');

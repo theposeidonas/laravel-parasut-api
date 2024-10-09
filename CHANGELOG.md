@@ -1,5 +1,11 @@
 ### Changelog
 
+#### V1.2.2
+
+**9 Ekim 2024**
+
+- Laravel Pint Formatting
+
 #### V1.2.1
 
 **7 Ekim 2024**

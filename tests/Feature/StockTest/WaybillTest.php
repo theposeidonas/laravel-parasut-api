@@ -2,8 +2,8 @@
 
 namespace Theposeidonas\LaravelParasutApi\Tests\Feature\StockTest;
 
-use Theposeidonas\LaravelParasutApi\Models\Stock\Waybill;
 use Illuminate\Support\Facades\Http;
+use Theposeidonas\LaravelParasutApi\Models\Stock\Waybill;
 use Theposeidonas\LaravelParasutApi\Tests\Feature\BaseTest;
 
 class WaybillTest extends BaseTest
@@ -23,8 +23,8 @@ class WaybillTest extends BaseTest
                 'data' => [
                     ['id' => '1', 'type' => 'shipment_document', 'attributes' => ['issue_date' => '2024-01-01']],
                     ['id' => '2', 'type' => 'shipment_document', 'attributes' => ['issue_date' => '2024-01-02']],
-                ]
-            ], 200)
+                ],
+            ], 200),
         ]);
 
         $response = $this->waybill->index();
@@ -38,8 +38,8 @@ class WaybillTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/shipment_documents' => Http::response([
-                'data' => ['id' => '1', 'type' => 'shipment_document', 'attributes' => ['issue_date' => '2024-01-01']]
-            ], 201)
+                'data' => ['id' => '1', 'type' => 'shipment_document', 'attributes' => ['issue_date' => '2024-01-01']],
+            ], 201),
         ]);
 
         $response = $this->waybill->create(['issue_date' => '2024-01-01']);
@@ -52,8 +52,8 @@ class WaybillTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/shipment_documents/1' => Http::response([
-                'data' => ['id' => '1', 'type' => 'shipment_document', 'attributes' => ['issue_date' => '2024-01-01']]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'shipment_document', 'attributes' => ['issue_date' => '2024-01-01']],
+            ], 200),
         ]);
 
         $response = $this->waybill->show('1');
@@ -66,8 +66,8 @@ class WaybillTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/shipment_documents/1' => Http::response([
-                'data' => ['id' => '1', 'type' => 'shipment_document', 'attributes' => ['issue_date' => '2024-01-02']]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'shipment_document', 'attributes' => ['issue_date' => '2024-01-02']],
+            ], 200),
         ]);
 
         $response = $this->waybill->edit('1', ['issue_date' => '2024-01-02']);
@@ -79,7 +79,7 @@ class WaybillTest extends BaseTest
     public function test_delete_waybill()
     {
         Http::fake([
-            config('parasut.api_url').config('parasut.company_id').'/shipment_documents/1' => Http::response([], 204)
+            config('parasut.api_url').config('parasut.company_id').'/shipment_documents/1' => Http::response([], 204),
         ]);
 
         $response = $this->waybill->delete('1');

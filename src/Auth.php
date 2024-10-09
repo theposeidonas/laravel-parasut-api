@@ -5,7 +5,6 @@ namespace Theposeidonas\LaravelParasutApi;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 
-
 /**
  * Paraşüt OAuth2 işlemleri
  */
@@ -15,7 +14,6 @@ class Auth
 
     /**
      * Auth constructor.
-     * @param array $config
      */
     public function __construct(array $config)
     {
@@ -24,14 +22,12 @@ class Auth
 
     /**
      * Get the cached token or fetch a new one.
-     *
-     * @return string
      */
     public function getToken(): string
     {
         $accessToken = Cache::get('parachute_token');
 
-        if (!$accessToken) {
+        if (! $accessToken) {
             return $this->fetchNewToken();
         }
 
@@ -40,8 +36,6 @@ class Auth
 
     /**
      * Fetch a new access token from the OAuth endpoint.
-     *
-     * @return string
      */
     private function fetchNewToken(): string
     {
@@ -49,24 +43,24 @@ class Auth
 
         try {
             $response = Http::asForm()->post($tokenEndpoint, [
-                'grant_type'    => 'password',
-                'client_id'     => $this->config['client_id'],
+                'grant_type' => 'password',
+                'client_id' => $this->config['client_id'],
                 'client_secret' => $this->config['client_secret'],
-                'username'      => $this->config['username'],
-                'password'      => $this->config['password'],
-                'redirect_uri'  => $this->config['redirect_uri'],
+                'username' => $this->config['username'],
+                'password' => $this->config['password'],
+                'redirect_uri' => $this->config['redirect_uri'],
             ]);
 
             if ($response->successful()) {
                 $data = $response->json();
                 Cache::put('parachute_token', $data['access_token'], now()->addSeconds($data['expires_in']));
+
                 return $data['access_token'];
             }
 
-            throw new \Exception('Token fetch failed: ' . $response->body());
-
+            throw new \Exception('Token fetch failed: '.$response->body());
         } catch (\Exception $e) {
-            return 'Error: ' . $e->getMessage();
+            return 'Error: '.$e->getMessage();
         }
     }
 }

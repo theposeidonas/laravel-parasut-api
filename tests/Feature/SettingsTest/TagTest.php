@@ -2,8 +2,8 @@
 
 namespace Theposeidonas\LaravelParasutApi\Tests\Feature\SettingsTest;
 
-use Theposeidonas\LaravelParasutApi\Models\Settings\Tag;
 use Illuminate\Support\Facades\Http;
+use Theposeidonas\LaravelParasutApi\Models\Settings\Tag;
 use Theposeidonas\LaravelParasutApi\Tests\Feature\BaseTest;
 
 class TagTest extends BaseTest
@@ -23,8 +23,8 @@ class TagTest extends BaseTest
                 'data' => [
                     ['id' => '1', 'type' => 'tag', 'attributes' => ['name' => 'Tag 1']],
                     ['id' => '2', 'type' => 'tag', 'attributes' => ['name' => 'Tag 2']],
-                ]
-            ], 200)
+                ],
+            ], 200),
         ]);
 
         $response = $this->tag->index();
@@ -38,8 +38,8 @@ class TagTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/tags' => Http::response([
-                'data' => ['id' => '1', 'type' => 'tag', 'attributes' => ['name' => 'New Tag']]
-            ], 201)
+                'data' => ['id' => '1', 'type' => 'tag', 'attributes' => ['name' => 'New Tag']],
+            ], 201),
         ]);
 
         $response = $this->tag->create(['name' => 'New Tag']);
@@ -52,8 +52,8 @@ class TagTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/tags/1' => Http::response([
-                'data' => ['id' => '1', 'type' => 'tag', 'attributes' => ['name' => 'Tag 1']]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'tag', 'attributes' => ['name' => 'Tag 1']],
+            ], 200),
         ]);
 
         $response = $this->tag->show('1');
@@ -66,8 +66,8 @@ class TagTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/tags/1' => Http::response([
-                'data' => ['id' => '1', 'type' => 'tag', 'attributes' => ['name' => 'Updated Tag']]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'tag', 'attributes' => ['name' => 'Updated Tag']],
+            ], 200),
         ]);
 
         $response = $this->tag->edit('1', ['name' => 'Updated Tag']);
@@ -79,7 +79,7 @@ class TagTest extends BaseTest
     public function test_delete_tag()
     {
         Http::fake([
-            config('parasut.api_url').config('parasut.company_id').'/tags/1' => Http::response([], 204)
+            config('parasut.api_url').config('parasut.company_id').'/tags/1' => Http::response([], 204),
         ]);
 
         $response = $this->tag->delete('1');

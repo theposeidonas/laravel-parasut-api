@@ -2,8 +2,8 @@
 
 namespace Theposeidonas\LaravelParasutApi\Tests\Feature\FormalizationTest;
 
-use Theposeidonas\LaravelParasutApi\Models\Formalization\EArchive;
 use Illuminate\Support\Facades\Http;
+use Theposeidonas\LaravelParasutApi\Models\Formalization\EArchive;
 use Theposeidonas\LaravelParasutApi\Tests\Feature\BaseTest;
 
 class EArchiveTest extends BaseTest
@@ -20,8 +20,8 @@ class EArchiveTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/e_archives' => Http::response([
-                'data' => ['id' => '1', 'type' => 'e_archive', 'attributes' => ['status' => 'sent']]
-            ], 201)
+                'data' => ['id' => '1', 'type' => 'e_archive', 'attributes' => ['status' => 'sent']],
+            ], 201),
         ]);
 
         $response = $this->eArchive->create(['invoice_data' => 'test_data']);
@@ -34,8 +34,8 @@ class EArchiveTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/e_archives/1' => Http::response([
-                'data' => ['id' => '1', 'type' => 'e_archive', 'attributes' => ['status' => 'approved']]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'e_archive', 'attributes' => ['status' => 'approved']],
+            ], 200),
         ]);
 
         $response = $this->eArchive->show('1');
@@ -48,8 +48,8 @@ class EArchiveTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/e_archives/1/pdf' => Http::response([
-                'data' => ['id' => '1', 'type' => 'e_document_pdfs', 'attributes' => ['url' => 'pdf-url123.pdf', 'expires_at'=>'2024-10-07T09:57:49Z']]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'e_document_pdfs', 'attributes' => ['url' => 'pdf-url123.pdf', 'expires_at' => '2024-10-07T09:57:49Z']],
+            ], 200),
         ]);
 
         $response = $this->eArchive->showPDF('1');

@@ -6,7 +6,6 @@ use Illuminate\Support\ServiceProvider;
 
 class ParasutServiceProvider extends ServiceProvider
 {
-
     /**
      * Bootstrap any package services.
      *
@@ -15,7 +14,7 @@ class ParasutServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../config/parasut.php' => config_path('parasut.php'),
+            __DIR__.'/../config/parasut.php' => config_path('parasut.php'),
         ], 'parasut-config');
     }
 
@@ -26,7 +25,7 @@ class ParasutServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/parasut.php', 'parasut');
+        $this->mergeConfigFrom(__DIR__.'/../config/parasut.php', 'parasut');
         $this->app->singleton(ParasutV4::class, function ($app) {
             return new ParasutV4($app['config']['parasut']);
         });

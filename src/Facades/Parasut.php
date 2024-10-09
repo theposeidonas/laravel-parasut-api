@@ -13,15 +13,11 @@
 
 namespace Theposeidonas\LaravelParasutApi\Facades;
 
-use Theposeidonas\LaravelParasutApi\ParasutV4;
 use Illuminate\Support\Facades\Facade;
+use Theposeidonas\LaravelParasutApi\ParasutV4;
 
 class Parasut extends Facade
 {
-
-    /**
-     * @return string
-     */
     public static function getFacadeAccessor(): string
     {
         return ParasutV4::class;

@@ -2,8 +2,8 @@
 
 namespace Theposeidonas\LaravelParasutApi\Tests\Feature\FormalizationTest;
 
-use Theposeidonas\LaravelParasutApi\Models\Formalization\Inbox;
 use Illuminate\Support\Facades\Http;
+use Theposeidonas\LaravelParasutApi\Models\Formalization\Inbox;
 use Theposeidonas\LaravelParasutApi\Tests\Feature\BaseTest;
 
 class InboxTest extends BaseTest
@@ -23,8 +23,8 @@ class InboxTest extends BaseTest
                 'data' => [
                     ['id' => '1', 'type' => 'e_invoice_inbox', 'attributes' => ['vkn' => 1234567890]],
                     ['id' => '2', 'type' => 'e_invoice_inbox', 'attributes' => ['vkn' => 1257654321]],
-                ]
-            ], 200)
+                ],
+            ], 200),
         ]);
 
         $response = $this->inbox->index(['filter' => ['vkn' => 1234567890]]);

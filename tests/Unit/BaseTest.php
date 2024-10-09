@@ -10,8 +10,8 @@ abstract class BaseTest extends OrchestraTestCase
     {
         parent::setUp();
 
-        if (file_exists(__DIR__ . '/../../.env')) {
-            \Dotenv\Dotenv::createImmutable(__DIR__ . '/../../')->load();
+        if (file_exists(__DIR__.'/../../.env')) {
+            \Dotenv\Dotenv::createImmutable(__DIR__.'/../../')->load();
         }
 
         config()->set('parasut.username', env('PARASUT_USERNAME'));

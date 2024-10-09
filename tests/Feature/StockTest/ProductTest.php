@@ -2,8 +2,8 @@
 
 namespace Theposeidonas\LaravelParasutApi\Tests\Feature\StockTest;
 
-use Theposeidonas\LaravelParasutApi\Models\Stock\Product;
 use Illuminate\Support\Facades\Http;
+use Theposeidonas\LaravelParasutApi\Models\Stock\Product;
 use Theposeidonas\LaravelParasutApi\Tests\Feature\BaseTest;
 
 class ProductTest extends BaseTest
@@ -23,8 +23,8 @@ class ProductTest extends BaseTest
                 'data' => [
                     ['id' => '1', 'type' => 'product', 'attributes' => ['name' => 'Product 1']],
                     ['id' => '2', 'type' => 'product', 'attributes' => ['name' => 'Product 2']],
-                ]
-            ], 200)
+                ],
+            ], 200),
         ]);
 
         $response = $this->product->index();
@@ -38,8 +38,8 @@ class ProductTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/products' => Http::response([
-                'data' => ['id' => '1', 'type' => 'product', 'attributes' => ['name' => 'New Product']]
-            ], 201)
+                'data' => ['id' => '1', 'type' => 'product', 'attributes' => ['name' => 'New Product']],
+            ], 201),
         ]);
 
         $response = $this->product->create(['name' => 'New Product']);
@@ -52,8 +52,8 @@ class ProductTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/products/1' => Http::response([
-                'data' => ['id' => '1', 'type' => 'product', 'attributes' => ['name' => 'Product 1']]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'product', 'attributes' => ['name' => 'Product 1']],
+            ], 200),
         ]);
 
         $response = $this->product->show('1');
@@ -66,8 +66,8 @@ class ProductTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/products/1' => Http::response([
-                'data' => ['id' => '1', 'type' => 'product', 'attributes' => ['name' => 'Updated Product']]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'product', 'attributes' => ['name' => 'Updated Product']],
+            ], 200),
         ]);
 
         $response = $this->product->edit('1', ['name' => 'Updated Product']);
@@ -79,7 +79,7 @@ class ProductTest extends BaseTest
     public function test_delete_product()
     {
         Http::fake([
-            config('parasut.api_url').config('parasut.company_id').'/products/1' => Http::response([], 204)
+            config('parasut.api_url').config('parasut.company_id').'/products/1' => Http::response([], 204),
         ]);
 
         $response = $this->product->delete('1');
@@ -95,8 +95,8 @@ class ProductTest extends BaseTest
                 'data' => [
                     ['id' => '1', 'type' => 'inventory_level', 'attributes' => ['stock_count' => 50]],
                     ['id' => '2', 'type' => 'inventory_level', 'attributes' => ['stock_count' => 30]],
-                ]
-            ], 200)
+                ],
+            ], 200),
         ]);
 
         $response = $this->product->inventory('1');

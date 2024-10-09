@@ -2,9 +2,9 @@
 
 namespace Theposeidonas\LaravelParasutApi\Tests\Unit;
 
-use Theposeidonas\LaravelParasutApi\ParasutV4;
 use Illuminate\Http\Client\Response;
 use Orchestra\Testbench\TestCase;
+use Theposeidonas\LaravelParasutApi\ParasutV4;
 
 class ParasutV4Test extends TestCase
 {
@@ -21,7 +21,7 @@ class ParasutV4Test extends TestCase
             'client_id' => 'test_client_id',
             'client_secret' => 'test_client_secret',
             'redirect_uri' => 'test_redirect_uri',
-            'api_url' => 'https://api.parasut.com/v4/'
+            'api_url' => 'https://api.parasut.com/v4/',
         ]);
     }
 

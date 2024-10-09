@@ -2,8 +2,8 @@
 
 namespace Theposeidonas\LaravelParasutApi\Tests\Feature\ExpensesTest;
 
-use Theposeidonas\LaravelParasutApi\Models\Expenses\Tax;
 use Illuminate\Support\Facades\Http;
+use Theposeidonas\LaravelParasutApi\Models\Expenses\Tax;
 use Theposeidonas\LaravelParasutApi\Tests\Feature\BaseTest;
 
 class TaxTest extends BaseTest
@@ -23,8 +23,8 @@ class TaxTest extends BaseTest
                 'data' => [
                     ['id' => '1', 'type' => 'tax', 'attributes' => ['amount' => 100]],
                     ['id' => '2', 'type' => 'tax', 'attributes' => ['amount' => 200]],
-                ]
-            ], 200)
+                ],
+            ], 200),
         ]);
 
         $response = $this->tax->index();
@@ -38,8 +38,8 @@ class TaxTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/taxes' => Http::response([
-                'data' => ['id' => '1', 'type' => 'tax', 'attributes' => ['amount' => 150]]
-            ], 201)
+                'data' => ['id' => '1', 'type' => 'tax', 'attributes' => ['amount' => 150]],
+            ], 201),
         ]);
 
         $response = $this->tax->create(['amount' => 150], []);
@@ -52,8 +52,8 @@ class TaxTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/taxes/1' => Http::response([
-                'data' => ['id' => '1', 'type' => 'tax', 'attributes' => ['amount' => 100]]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'tax', 'attributes' => ['amount' => 100]],
+            ], 200),
         ]);
 
         $response = $this->tax->show('1');
@@ -66,8 +66,8 @@ class TaxTest extends BaseTest
     {
         Http::fake([
             config('parasut.api_url').config('parasut.company_id').'/taxes/1' => Http::response([
-                'data' => ['id' => '1', 'type' => 'tax', 'attributes' => ['amount' => 200]]
-            ], 200)
+                'data' => ['id' => '1', 'type' => 'tax', 'attributes' => ['amount' => 200]],
+            ], 200),
         ]);
 
         $response = $this->tax->edit('1', ['amount' => 200], []);
@@ -79,7 +79,7 @@ class TaxTest extends BaseTest
     public function test_delete_tax()
     {
         Http::fake([
-            config('parasut.api_url').config('parasut.company_id').'/taxes/1' => Http::response([], 204)
+            config('parasut.api_url').config('parasut.company_id').'/taxes/1' => Http::response([], 204),
         ]);
 
         $response = $this->tax->delete('1');
