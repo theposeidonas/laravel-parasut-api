@@ -32,7 +32,7 @@ class ParasutV4Test extends TestCase
 
     public function test_handle_response_successful()
     {
-        $mockResponse = $this->createMock(Response::class);
+        $mockResponse = $this->createStub(Response::class);
         $mockResponse->method('successful')->willReturn(true);
         $mockResponse->method('body')->willReturn(json_encode(['data' => 'success']));
         $mockResponse->method('status')->willReturn(200);
@@ -47,7 +47,7 @@ class ParasutV4Test extends TestCase
 
     public function test_handle_response_failure()
     {
-        $mockResponse = $this->createMock(Response::class);
+        $mockResponse = $this->createStub(Response::class);
         $mockResponse->method('successful')->willReturn(false);
         $mockResponse->method('body')->willReturn(json_encode(['error' => 'Unauthorized']));
         $mockResponse->method('status')->willReturn(401);

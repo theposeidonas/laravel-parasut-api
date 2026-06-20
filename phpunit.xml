@@ -6,13 +6,20 @@
 >
     <php>
         <env name="APP_ENV" value="testing" force="true" />
+        <env name="PARASUT_USERNAME" value="test@example.com" force="true" />
+        <env name="PARASUT_PASSWORD" value="test-password" force="true" />
+        <env name="PARASUT_COMPANY_ID" value="1" force="true" />
+        <env name="PARASUT_CLIENT_ID" value="test-client-id" force="true" />
+        <env name="PARASUT_CLIENT_SECRET" value="test-client-secret" force="true" />
     </php>
     <testsuites>
         <testsuite name="Unit">
             <directory>tests/Unit</directory>
+            <exclude>tests/Unit/BaseTest.php</exclude>
         </testsuite>
         <testsuite name="Feature">
             <directory>tests/Feature</directory>
+            <exclude>tests/Feature/BaseTest.php</exclude>
         </testsuite>
     </testsuites>
 </phpunit>
