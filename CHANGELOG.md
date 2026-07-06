@@ -1,5 +1,15 @@
 ### Changelog
 
+#### V1.3.0
+
+**6 Temmuz 2026**
+
+- Laravel 13 desteği eklendi.
+- PHP minimum versiyon kısıtı `^8.0` olarak tanımlandı.
+- `orchestra/testbench` bağımlılığı `^6.0|^7.0|^8.0|^9.0|^10.0|^11.0` olarak güncellendi.
+- `phpunit/phpunit` bağımlılığı `^9.0|^10.0|^11.0` olarak güncellendi.
+- `phpunit.xml` PHPUnit 10/11 uyumluluğu için güncellendi.
+
 #### V1.2.2
 
 **9 Ekim 2024**
